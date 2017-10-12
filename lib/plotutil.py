@@ -44,5 +44,6 @@ def plot(func, xstart, xend, step):
 	yvals = create_y_values(func, xvals)
 
 	plt.plot(xvals, yvals, linewidth=2.0)
+	plt.savefig("temp/generated_plot.png")
 	plt.grid(True)
 	plt.show()

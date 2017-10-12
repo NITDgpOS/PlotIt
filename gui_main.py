@@ -17,14 +17,14 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = 1
 
-import support
+import gui_support
 
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
     global val, w, root
     root = Tk()
     top = New_Toplevel_1 (root)
-    support.init(root, top)
+    gui_support.init(root, top)
     root.mainloop()
 
 w = None
@@ -34,7 +34,7 @@ def create_New_Toplevel_1(root, *args, **kwargs):
     rt = root
     w = Toplevel (root)
     top = New_Toplevel_1 (w)
-    support.init(w, top, *args, **kwargs)
+    gui_support.init(w, top, *args, **kwargs)
     return (w, top)
 
 def destroy_New_Toplevel_1():
@@ -54,7 +54,7 @@ class New_Toplevel_1:
         _ana2color = '#d9d9d9' # X11 color: 'gray85' 
 
         top.geometry("555x398+408+185")
-        top.title("New Toplevel 1")
+        top.title("PlotIt")
 
 
 
@@ -66,43 +66,43 @@ class New_Toplevel_1:
         self.Canvas1.configure(selectbackground="#c4c4c4")
         self.Canvas1.configure(width=394)
 
-        self.Entry1 = Entry(top)
-        self.Entry1.place(relx=0.11, rely=0.85, relheight=0.05, relwidth=0.53)
-        self.Entry1.configure(background="white")
-        self.Entry1.configure(font="TkFixedFont")
-        self.Entry1.configure(width=296)
-
-        self.Button1 = Button(top)
-        self.Button1.place(relx=0.67, rely=0.85, height=26, width=47)
-        self.Button1.configure(activebackground="#d9d9d9")
-        self.Button1.configure(command=support.Plot)
-        self.Button1.configure(cursor="fleur")
-        self.Button1.configure(text='''Plot''')
-        self.Button1.configure(width=47)
+        self.fx = Entry(top)
+        self.fx.place(relx=0.11, rely=0.85, relheight=0.05, relwidth=0.53)
+        self.fx.configure(background="white")
+        self.fx.configure(font="TkFixedFont")
+        self.fx.configure(width=296)
 
         self.Label1 = Label(top)
         self.Label1.place(relx=0.77, rely=0.08, height=18, width=47)
         self.Label1.configure(text='''x lower''')
 
-        self.Entry2 = Entry(top)
-        self.Entry2.place(relx=0.88, rely=0.08, relheight=0.05, relwidth=0.08)
-        self.Entry2.configure(background="white")
-        self.Entry2.configure(font="TkFixedFont")
-        self.Entry2.configure(width=46)
+        self.x_lower = Entry(top)
+        self.x_lower.place(relx=0.88, rely=0.08, relheight=0.05, relwidth=0.08)
+        self.x_lower.configure(background="white")
+        self.x_lower.configure(font="TkFixedFont")
+        self.x_lower.configure(width=46)
 
         self.Label2 = Label(top)
         self.Label2.place(relx=0.77, rely=0.13, height=18, width=51)
         self.Label2.configure(text='''x upper''')
 
-        self.Entry3 = Entry(top)
-        self.Entry3.place(relx=0.88, rely=0.13, relheight=0.05, relwidth=0.08)
-        self.Entry3.configure(background="white")
-        self.Entry3.configure(font="TkFixedFont")
-        self.Entry3.configure(width=46)
+        self.x_upper = Entry(top)
+        self.x_upper.place(relx=0.88, rely=0.13, relheight=0.05, relwidth=0.08)
+        self.x_upper.configure(background="white")
+        self.x_upper.configure(font="TkFixedFont")
+        self.x_upper.configure(width=46)
 
         self.Label3 = Label(top)
         self.Label3.place(relx=0.04, rely=0.85, height=18, width=35)
         self.Label3.configure(text='''f(x)=''')
+
+        self.bt_plot = Button(top)
+        self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
+        self.bt_plot.configure(activebackground="#d9d9d9")
+        self.bt_plot.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.Canvas1))
+        self.bt_plot.configure(cursor="fleur")
+        self.bt_plot.configure(text='''Plot''')
+        self.bt_plot.configure(width=47)
 
     @staticmethod
     def popup1(event):
