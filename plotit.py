@@ -2,6 +2,7 @@ from lib import plotutil as plu
 import optparse
 import signal
 
+#Defaults
 xstart = 0
 xend = 100
 stepsize = 1.0
