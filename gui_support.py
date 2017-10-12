@@ -19,9 +19,21 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = 1
 
+from PIL import Image, ImageTk
+from subprocess import call
+import threading
 
-def Plot():
+def Plot(fx, x_l, x_u, canvas):
     print('support.Plot')
+
+    p = threading.Thread(target=lambda: call(["python","plotit.py",'-f',fx, '-s', x_l, '-e', x_u ]) )
+    p.start()
+    p.join()
+
+    gif1 = ImageTk.PhotoImage(image=Image.open("temp/generated_plot.png").resize((400,300),Image.ANTIALIAS))
+    canvas.create_image(5,10, image = gif1, anchor = NW)
+    canvas.gif1=gif1
+
     sys.stdout.flush()
 
 def init(top, gui, *args, **kwargs):
@@ -37,7 +49,7 @@ def destroy_window():
     top_level = None
 
 if __name__ == '__main__':
-    import main
-    main.vp_start_gui()
+    import gui_main
+    gui_main.vp_start_gui()
 
 
