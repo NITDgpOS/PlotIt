@@ -11,7 +11,7 @@ A terminal based tool to visualise mathematical functions.
 
 Thats it, you are all set to go !!
 
-## Uing PlotIt
+## Using PlotIt
 
 At present PlotIt takes 4 command line arguments and can be executed as shown below.
 
@@ -27,7 +27,8 @@ Default values of starting abcissa, ending abcissa and step size are 0, 100  and
 ### Some examples
 
 ```
-python plotit.py -f sin(x)
+
+python plotit.py -f 'sin(x)'
 
 python plotit.py -f 'x**2 + x'
 
