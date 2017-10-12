@@ -27,7 +27,6 @@ Default values of starting abcissa, ending abcissa and step size are 0, 100  and
 ### Some examples
 
 ```
-
 python plotit.py -f 'sin(x)'
 
 python plotit.py -f 'x**2 + x'
