@@ -7,6 +7,10 @@ def process_function(func):
 	func = func.replace('sin', 'math.sin')
 	func = func.replace('cos', 'math.cos')
 	func = func.replace('exp', 'math.exp')
+	func = func.replace('sqrt', 'math.sqrt')
+	func = func.replace('factorial', 'math.factorial')
+	func = func.replace('pi', 'math.pi')
+	func = func.replace('e', 'math.e')
 
 	return func
 
