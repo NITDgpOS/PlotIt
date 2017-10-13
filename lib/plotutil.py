@@ -49,3 +49,5 @@ def plot(func, xstart, xend, step, gui):
 		plt.show()
 	else:
 		plt.savefig(".temp/generated_plot.png")
+	plt.cla()
+	plt.clf()
