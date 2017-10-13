@@ -42,4 +42,4 @@ if options.stepsize:
 
 # visualise using matplotlib
 
-plu.plot(func, xstart, xend, stepsize)
+plu.plot(func, xstart, xend, stepsize, False)

@@ -25,6 +25,7 @@ def vp_start_gui():
     root = Tk()
     top = New_Toplevel_1 (root)
     gui_support.init(root, top)
+    root.protocol('WM_DELETE_WINDOW', destroy_app)
     root.mainloop()
 
 w = None
@@ -42,6 +43,10 @@ def destroy_New_Toplevel_1():
     w.destroy()
     w = None
 
+def destroy_app():
+    global root
+    root.destroy()
+    exit(0)
 
 class New_Toplevel_1:
     def __init__(self, top=None):
@@ -81,6 +86,7 @@ class New_Toplevel_1:
         self.x_lower.configure(background="white")
         self.x_lower.configure(font="TkFixedFont")
         self.x_lower.configure(width=46)
+        self.x_lower.insert(0, '0')
 
         self.Label2 = Label(top)
         self.Label2.place(relx=0.77, rely=0.13, height=18, width=51)
@@ -91,6 +97,7 @@ class New_Toplevel_1:
         self.x_upper.configure(background="white")
         self.x_upper.configure(font="TkFixedFont")
         self.x_upper.configure(width=46)
+        self.x_upper.insert(0, '100')
 
         self.Label3 = Label(top)
         self.Label3.place(relx=0.04, rely=0.85, height=18, width=35)
