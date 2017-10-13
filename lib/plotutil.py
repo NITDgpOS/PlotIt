@@ -45,6 +45,7 @@ def plot(func, xstart, xend, step, gui):
 
 	plt.plot(xvals, yvals, linewidth=2.0)
 	plt.grid(True)
-	plt.savefig("temp/generated_plot.png")
 	if not gui:
-	  plt.show()
+		plt.show()
+	else:
+		plt.savefig(".temp/generated_plot.png")
