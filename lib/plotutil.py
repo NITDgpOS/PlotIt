@@ -1,3 +1,4 @@
+import os
 import math
 import matplotlib.pyplot as plt
 
@@ -48,6 +49,8 @@ def plot(func, xstart, xend, step, gui):
 	if not gui:
 		plt.show()
 	else:
+		if not os.path.exists('.temp/'):
+			os.mkdir('.temp/')
 		plt.savefig(".temp/generated_plot.png")
 	plt.cla()
 	plt.clf()
