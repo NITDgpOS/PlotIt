@@ -42,6 +42,17 @@ python plotit.py -f 'x**3 + x**2 + x'
 python plotit.py -f 'exp(x)'
 
 ```
+### PlotIt GUI
+
+PlotIt also provides a simple GUI to enter your function and visualise it. In order to use GUI instead
+of terminal use the command given below.
+
+```
+python gui_main.py
+
+```
+
+Before going for GUI mode, make sure you have installed Tkinter, PIL and ImageTk as mentioned above.
 
 ## Future Milestones
 
