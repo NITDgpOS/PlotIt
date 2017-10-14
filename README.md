@@ -60,5 +60,5 @@ Before going for GUI mode, make sure you have installed Tkinter, PIL and ImageTk
 - Allowing user to plot multiple functions
 - Adding a config (perhaps json) file to configure the app and visualisations
 - Creating an interactive shell
-- Creating a GUI
+- Enhancing GUI and adding more options
 
