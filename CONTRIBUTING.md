@@ -17,9 +17,9 @@ have a reference to an issue.**
 - Hack the code, kill the bug or introduce the new feature you had in mind,
   do all kinds of awesome stuff.
 - After you are done add your changes using ``` git add --all```
-- Commit your changes using ``` git commit ```
+- Commit your changes using ``` git commit ``` and provide a commit message.
 - After you have committed your changes push your changes to your forked repository
-  using ``` git push origin mybug
+  using ``` git push origin mybug ```
 - Finally create a pull request from github.
 - If everything is alright then soon your changes will get merged or else you will
   be asked to make changes.
