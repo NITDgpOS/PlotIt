@@ -1,19 +1,6 @@
 import os
-import math
+from math import *
 import matplotlib.pyplot as plt
-
-def process_function(func):
-	# add more transformations here
-
-	func = func.replace('sin', 'math.sin')
-	func = func.replace('cos', 'math.cos')
-	func = func.replace('exp', 'math.exp')
-	func = func.replace('sqrt', 'math.sqrt')
-	func = func.replace('factorial', 'math.factorial')
-	func = func.replace('pi', 'math.pi')
-	func = func.replace('e', 'math.e')
-
-	return func
 
 def create_y_values(func, xvals):
 	# create function ordinate values
@@ -32,10 +19,6 @@ def plot(func, xstart, xend, step, gui):
 	print 'starting abcissa: {}'.format(xstart)
 	print 'ending abcissa: {}'.format(xend)
 	print 'step size: {}'.format(step)
-
-	# preprocess function
-
-	func = process_function(func)
 
 	xvals = []
 	i = xstart
