@@ -27,7 +27,10 @@ def plot(func, xstart, xend, step, gui):
 		i += step
 	yvals = create_y_values(func, xvals)
 
-	plt.plot(xvals, yvals, linewidth=2.0)
+	try:
+		plt.plot(xvals, yvals, linewidth=2.0)
+  	except:
+		print('An error occured.')
 	plt.grid(True)
 	if not gui:
 		plt.show()
