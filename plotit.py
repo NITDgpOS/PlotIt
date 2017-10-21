@@ -47,4 +47,4 @@ if options.color:
 
 # visualise using matplotlib
 
-plu.plot(func, xstart, xend, stepsize, color,False)
+plu.plot(func, xstart, xend, stepsize, color, False)
