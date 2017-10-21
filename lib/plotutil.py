@@ -17,7 +17,7 @@ def create_y_values(func, xvals):
 			return
 	return yvals
 
-def plot(func, xstart, xend, step, color_name ,gui):
+def plot(func, xstart, xend, step, color_name, gui):
 	# show plot summary
 
 	print '***** Plot Summary *****'
@@ -39,9 +39,9 @@ def plot(func, xstart, xend, step, color_name ,gui):
 		if not is_hex:
 			colors = mcolors.cnames
 			if not color_name in colors:
-				print "Color not found. Setting to default color[Blue]."
+				print color_name,": Color not found. Setting to default color[Blue]."
 				color_name = 'blue'
-		plt.plot(xvals, yvals, color=color_name,linewidth=2.0)
+		plt.plot(xvals, yvals, color=color_name, linewidth=2.0)
   	except:
 		print('An error occured.')
 	plt.grid(True)
