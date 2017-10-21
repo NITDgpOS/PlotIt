@@ -7,8 +7,12 @@ def create_y_values(func, xvals):
 
 	yvals = []
 	for x in xvals:
-		yval = eval(func)
-		yvals.append(yval)
+		try:
+			yval = eval(func)
+			yvals.append(yval)
+		except:
+			print "Function cannot be evaluated for x =",x
+			return
 	return yvals
 
 def plot(func, xstart, xend, step, gui):
