@@ -106,7 +106,7 @@ class New_Toplevel_1:
         self.bt_plot = Button(top)
         self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
         self.bt_plot.configure(activebackground="#d9d9d9")
-        self.bt_plot.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(),"#FFFF00" ,self.Canvas1))
+        self.bt_plot.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FFFF00", self.Canvas1))
         self.bt_plot.configure(cursor="fleur")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
