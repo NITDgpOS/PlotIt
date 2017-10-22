@@ -7,7 +7,8 @@ A terminal based tool to visualise mathematical functions.
 - Clone the repository using ``` git clone https://github.com/djmgit/PlotIt.git ```
 - Enter into the repository and open in terminal
 - Run ``` pip install -r requirements.txt ``` This will install the only dependency (as of now) that is
-  matplotlib, a python librarty to visualise graphs and PIL.
+  matplotlib, a python librarty to visualise graphs and PIL. If it is not working and is showing
+  permission denied error, then try ``` sudo pip install -r requirements.txt ```.
 - Tkinter library is required for GUI components, if it is not already installed then install it
   using ``` sudo apt-get install python-tk ```
 - The project requires ImageTk. If it is not already installed then install it using
@@ -53,6 +54,10 @@ python gui_main.py
 ```
 
 Before going for GUI mode, make sure you have installed Tkinter, PIL and ImageTk as mentioned above.
+
+## For contributors
+
+If you want to contribute to this project then have a look [here](https://github.com/NIT-dgp/PlotIt/blob/master/CONTRIBUTING.md)
 
 ## Future Milestones
 
