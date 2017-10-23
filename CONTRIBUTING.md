@@ -24,6 +24,8 @@ have a reference to an issue.**
 - If everything is alright then soon your changes will get merged or else you will
   be asked to make changes.
 
+There should be **only one commit per pull request**.
+
 Please try to make sure that your commit message and body follows the
 guidelines below.
 
