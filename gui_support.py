@@ -22,8 +22,8 @@ except ImportError:
 from PIL import Image, ImageTk
 from lib import plotutil as plu
 
-def Plot(fx, x_l, x_u, canvas):
-    plu.plot(fx, int(x_l), int(x_u), 1.0, True)
+def Plot(fx, x_l, x_u, color_name, canvas):
+    plu.plot(fx, int(x_l), int(x_u), 1.0, color_name, True)
 
     gif1 = ImageTk.PhotoImage(image=Image.open(".temp/generated_plot.png").resize((400,300),Image.ANTIALIAS))
     canvas.create_image(5,10, image = gif1, anchor = NW)

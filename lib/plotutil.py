@@ -25,6 +25,7 @@ def plot(func, xstart, xend, step, color_name, gui):
 	print 'starting abcissa: {}'.format(xstart)
 	print 'ending abcissa: {}'.format(xend)
 	print 'step size: {}'.format(step)
+	print 'Color: {}'.format(color_name)
 
 	xvals = []
 	i = xstart
@@ -39,7 +40,7 @@ def plot(func, xstart, xend, step, color_name, gui):
 		if not is_hex:
 			colors = mcolors.cnames
 			if not color_name in colors:
-				print color_name,": Color not found. Setting to default color[Blue]."
+				print color_name,": Color not found."
 				color_name = 'blue'
 		plt.plot(xvals, yvals, color=color_name, linewidth=2.0)
   	except:
