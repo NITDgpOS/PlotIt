@@ -55,8 +55,8 @@ class New_Toplevel_1:
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
         _fgcolor = '#000000'  # X11 color: 'black'
         _compcolor = '#d9d9d9' # X11 color: 'gray85'
-        _ana1color = '#d9d9d9' # X11 color: 'gray85' 
-        _ana2color = '#d9d9d9' # X11 color: 'gray85' 
+        _ana1color = '#d9d9d9' # X11 color: 'gray85'
+        _ana2color = '#d9d9d9' # X11 color: 'gray85'
 
         top.geometry("555x398+408+185")
         top.title("PlotIt")
@@ -76,6 +76,7 @@ class New_Toplevel_1:
         self.fx.configure(background="white")
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
+        self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FFFF00", self.Canvas1))
 
         self.Label1 = Label(top)
         self.Label1.place(relx=0.77, rely=0.08, height=18, width=47)
@@ -167,6 +168,3 @@ class New_Toplevel_1:
 
 if __name__ == '__main__':
     vp_start_gui()
-
-
-
