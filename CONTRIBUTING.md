@@ -1,12 +1,12 @@
 ## Getting involved
 
 **PlotIt** is presently at its initial stages of development and we would love to have
-contributors. So if you have find a bug or have a cool feature in mind which you want to
+contributors. So if you have found a bug or have a cool feature in mind which you want to
 add, then please follow the steps given below to contribute to this project.
 
 ### Making your your first pull request
 
-Please open a **new issue** brfore making any pull request. **Every pull request should
+Please open a **new issue** before making any pull request. **Every pull request should
 have a reference to an issue.**
 
 - First, fork this repository
