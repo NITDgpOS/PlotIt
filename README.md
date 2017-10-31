@@ -25,7 +25,7 @@ python plotit.py -f '[function]' -s [starting_abcissa] -e [ending_abcissa] -z [s
 
 ```
 
-It is to be noted that if function contins more than one term for eg ``` x**2 + x ``` then function
+It is to be noted that if function contains more than one term for eg ``` x**2 + x ``` then function
 should be under single quotes.
 Default values of starting abcissa, ending abcissa and step size are 0, 100  and 1.0 respectively
 
