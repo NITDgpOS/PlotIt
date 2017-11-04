@@ -116,44 +116,41 @@ class New_Toplevel_1:
         self.Label3.place(relx=0.78, rely=0.34, height=18, width=100)
         self.Label3.configure(text=" Choose the Color ")
 
-        self.rd_btn1 = Radiobutton(top, text="Red   ", padx=20, variable=v, value=1)
-        self.rd_btn1.pack(side = 'top', anchor = 'w')
-        self.rd_btn1.place(relx=0.78, rely=0.40, height=18, width=60)
-        self.rd_btn1.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FF0000", self.Canvas1))
-
-        self.rd_btn2 = Radiobutton(top, text="Blue  ", padx=20, variable=v, value=2)
-        self.rd_btn2.pack(side = 'top', anchor = 'w')
-        self.rd_btn2.place(relx=0.78, rely=0.46, height=18, width=60)
-        self.rd_btn2.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#0000FF", self.Canvas1))
-
-        self.rd_btn3 = Radiobutton(top, text="Cyan  ", padx=20, variable=v, value=3)
-        self.rd_btn3.pack(side = 'top', anchor = 'w')
-        self.rd_btn3.place(relx=0.78, rely=0.52, height=18, width=60)
-        self.rd_btn3.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#00FFFF", self.Canvas1))
-
-        self.rd_btn4 = Radiobutton(top, text="Black ", padx=20, variable=v, value=4)
-        self.rd_btn4.pack(side = 'top', anchor = 'w')
-        self.rd_btn4.place(relx=0.78, rely=0.58, height=18, width=60)
-        self.rd_btn4.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#000000", self.Canvas1))
-
-        self.rd_btn5 = Radiobutton(top, text="Green ", padx=20, variable=v, value=5)
-        self.rd_btn5.pack(side = 'top', anchor = 'w')
-        self.rd_btn5.place(relx=0.78, rely=0.64, height=18, width=60)
-        self.rd_btn5.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#008000", self.Canvas1))
+        self.current_color = StringVar(top)
+        self.current_color.set('Red')
+        self.colors = {'Red','Blue','Cyan','Black','Green'}
+        self.dropdown_menu = OptionMenu(top,self.current_color,*self.colors, command = self.Dropdown_Changed)
+        self.dropdown_menu.pack(side = 'top', anchor = 'w')
+        self.dropdown_menu.place(relx=0.78, rely=0.40, height=18, width=100)
 
         self.color_input = Entry(top)
-        self.color_input.place(relx=0.79, rely=0.70, relheight=0.05, relwidth=0.10)
+        self.color_input.place(relx=0.78, rely=0.47, relheight=0.05, relwidth=0.10)
         self.color_input.configure(background="white")
         self.color_input.configure(font="TkFixedFont")
         self.color_input.insert(0, '#ABCDEF')
 
         self.bt_go = Button(top)
-        self.bt_go.place(relx=0.90, rely=0.70, height=20, width=40)
+        self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
         self.bt_go.configure(activebackground="#d9d9d9")
         self.bt_go.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.Canvas1))
         self.bt_go.configure(cursor="fleur")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
+
+    def Dropdown_Changed(self, current_color):
+        color = '#000000'
+        if current_color == 'Red':
+            color = '#FF0000'
+        elif current_color == 'Blue':
+            color = '#0000FF'
+        elif current_color == 'Cyan':
+            color = '#00FFFF'
+        elif current_color == 'Black':
+            color = '#000000'
+        elif current_color == 'Green':
+            color = '#008000'
+        self.color_input.delete(0,100)
+        self.color_input.insert(0,color)
 
     @staticmethod
     def popup1(event):
