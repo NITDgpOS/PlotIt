@@ -77,6 +77,7 @@ class New_Toplevel_1:
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
         self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FFFF00", self.Canvas1))
+        self.fx.configure(fg='#000000')
 
         self.Label1 = Label(top)
         self.Label1.place(relx=0.77, rely=0.08, height=18, width=47)
@@ -88,6 +89,7 @@ class New_Toplevel_1:
         self.x_lower.configure(font="TkFixedFont")
         self.x_lower.configure(width=46)
         self.x_lower.insert(0, '0')
+        self.x_lower.configure(fg='#000000')
 
         self.Label2 = Label(top)
         self.Label2.place(relx=0.77, rely=0.13, height=18, width=51)
@@ -99,6 +101,7 @@ class New_Toplevel_1:
         self.x_upper.configure(font="TkFixedFont")
         self.x_upper.configure(width=46)
         self.x_upper.insert(0, '100')
+        self.x_upper.configure(fg='#000000')
 
         self.Label3 = Label(top)
         self.Label3.place(relx=0.04, rely=0.85, height=18, width=35)
@@ -128,6 +131,7 @@ class New_Toplevel_1:
         self.color_input.configure(background="white")
         self.color_input.configure(font="TkFixedFont")
         self.color_input.insert(0, '#ABCDEF')
+        self.color_input.configure(fg='#000000')
 
         self.bt_go = Button(top)
         self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
