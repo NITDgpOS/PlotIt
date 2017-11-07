@@ -7,6 +7,8 @@ xstart = 0
 xend = 100
 stepsize = 1.0
 color = "blue"
+xlabel = "X-axis"
+ylabel = "Y-axis"
 
 # handle case if user presses Ctrl + C, show proper message while shutting down
 
@@ -24,6 +26,8 @@ parser.add_option('-s', '--xstart', dest='xstart', help='Enter starting x-value'
 parser.add_option('-e', '--xend', dest='xend', help='Enter ending x-value')
 parser.add_option('-z', '--stepsize', dest='stepsize', help='Enter step size')
 parser.add_option('-c', '--color', dest='color', help='Enter the color for plot')
+parser.add_option('-x', '--xlabel',dest='xlabel', help='Enter the x-label for plot')
+parser.add_option('-y', '--ylabel',dest='ylabel', help='Enter the y-label for plot')
 
 (options, args) = parser.parse_args()
 
@@ -45,6 +49,11 @@ if options.stepsize:
 if options.color:
 	color = str(options.color)
 
+if options.xlabel:
+	xlabel = str(options.xlabel)
+
+if options.ylabel:
+	ylabel = str(options.ylabel)
 # visualise using matplotlib
 
-plu.plot(func, xstart, xend, stepsize, color, False)
+plu.plot(func, xstart, xend, stepsize, color, xlabel, ylabel, False)

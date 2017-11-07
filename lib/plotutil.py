@@ -17,7 +17,7 @@ def create_y_values(func, xvals):
 			return
 	return yvals
 
-def plot(func, xstart, xend, step, color_name, gui):
+def plot(func, xstart, xend, step, color_name, xlabel, ylabel, gui):
 	# show plot summary
 
 	print '***** Plot Summary *****'
@@ -26,6 +26,8 @@ def plot(func, xstart, xend, step, color_name, gui):
 	print 'ending abcissa: {}'.format(xend)
 	print 'step size: {}'.format(step)
 	print 'Color: {}'.format(color_name)
+	print 'X-label: {}'.format(xlabel)
+	print 'Y-label: {}'.format(ylabel)
 
 	xvals = []
 	i = xstart
@@ -43,6 +45,8 @@ def plot(func, xstart, xend, step, color_name, gui):
 				print color_name,": Color not found."
 				color_name = 'blue'
 		plt.plot(xvals, yvals, color=color_name, linewidth=2.0)
+		plt.xlabel(xlabel)
+		plt.ylabel(ylabel)
   	except:
 		print('An error occured.')
 	plt.grid(True)
