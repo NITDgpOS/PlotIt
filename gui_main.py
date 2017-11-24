@@ -28,6 +28,15 @@ def vp_start_gui():
     root.protocol('WM_DELETE_WINDOW', destroy_app)
     root.mainloop()
 
+#global colors variables for theme switch
+_bgcolordark = '#000000'
+_fgcolordark = '#d9d9d9'
+_activebgcolordark = '#808080'
+_bgcolorlight = '#ffffff'
+_fgcolorlight = '#000000'
+_darkwindowbackground = '#31363b'
+_lightwindowbackground = '#f2f2f2'
+
 w = None
 def create_New_Toplevel_1(root, *args, **kwargs):
     '''Starting point when module is imported by another program.'''
@@ -52,8 +61,7 @@ class New_Toplevel_1:
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
-        _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _fgcolor = '#000000'  # X11 color: 'black'
+
         _compcolor = '#d9d9d9' # X11 color: 'gray85'
         _ana1color = '#d9d9d9' # X11 color: 'gray85'
         _ana2color = '#d9d9d9' # X11 color: 'gray85'
@@ -63,9 +71,12 @@ class New_Toplevel_1:
 
         v = IntVar()
 
+        self.theme = 'light'
+        root.configure(background=_lightwindowbackground)
+
         self.Canvas1 = Canvas(top)
         self.Canvas1.place(relx=0.04, rely=0.05, relheight=0.75, relwidth=0.72)
-        self.Canvas1.configure(background="white")
+        self.Canvas1.configure(background=_bgcolorlight)
         self.Canvas1.configure(borderwidth="2")
         self.Canvas1.configure(relief=RIDGE)
         self.Canvas1.configure(selectbackground="#c4c4c4")
@@ -73,51 +84,62 @@ class New_Toplevel_1:
 
         self.fx = Entry(top)
         self.fx.place(relx=0.11, rely=0.85, relheight=0.05, relwidth=0.53)
-        self.fx.configure(background="white")
+        self.fx.configure(background=_bgcolorlight)
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
-        self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FFFF00", self.Canvas1))
-        self.fx.configure(fg='#000000')
+        self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.theme, self.Canvas1))
+        self.fx.configure(fg=_fgcolorlight)
+        self.fx.configure(insertbackground=_fgcolorlight)
 
         self.Label1 = Label(top)
         self.Label1.place(relx=0.77, rely=0.08, height=18, width=47)
         self.Label1.configure(text='''x lower''')
+        self.Label1.configure(fg=_fgcolorlight)
+        self.Label1.configure(background=_lightwindowbackground)
 
         self.x_lower = Entry(top)
         self.x_lower.place(relx=0.88, rely=0.08, relheight=0.05, relwidth=0.08)
-        self.x_lower.configure(background="white")
+        self.x_lower.configure(background=_bgcolorlight)
         self.x_lower.configure(font="TkFixedFont")
         self.x_lower.configure(width=46)
         self.x_lower.insert(0, '0')
-        self.x_lower.configure(fg='#000000')
+        self.x_lower.configure(fg=_fgcolorlight)
 
         self.Label2 = Label(top)
         self.Label2.place(relx=0.77, rely=0.13, height=18, width=51)
         self.Label2.configure(text='''x upper''')
+        self.Label2.configure(fg=_fgcolorlight)
+        self.Label2.configure(background=_lightwindowbackground)
 
         self.x_upper = Entry(top)
         self.x_upper.place(relx=0.88, rely=0.13, relheight=0.05, relwidth=0.08)
-        self.x_upper.configure(background="white")
+        self.x_upper.configure(background=_bgcolorlight)
         self.x_upper.configure(font="TkFixedFont")
         self.x_upper.configure(width=46)
         self.x_upper.insert(0, '100')
-        self.x_upper.configure(fg='#000000')
+        self.x_upper.configure(fg=_fgcolorlight)
 
         self.Label3 = Label(top)
         self.Label3.place(relx=0.04, rely=0.85, height=18, width=35)
         self.Label3.configure(text='''f(x)=''')
+        self.Label3.configure(fg=_fgcolorlight)
+        self.Label3.configure(background=_lightwindowbackground)
 
         self.bt_plot = Button(top)
         self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
-        self.bt_plot.configure(activebackground="#d9d9d9")
-        self.bt_plot.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), "#FFFF00", self.Canvas1))
+        self.bt_plot.configure(activebackground=_activebgcolordark)
+        self.bt_plot.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.theme, self.Canvas1))
         self.bt_plot.configure(cursor="fleur")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
+        self.bt_plot.configure(background=_bgcolorlight)
+        self.bt_plot.configure(fg=_fgcolorlight)
 
-        self.Label3 = Label(top)
-        self.Label3.place(relx=0.78, rely=0.34, height=18, width=100)
-        self.Label3.configure(text=" Choose the Color ")
+        self.Label4 = Label(top)
+        self.Label4.place(relx=0.78, rely=0.34, height=18, width=100)
+        self.Label4.configure(text=" Choose the Color ")
+        self.Label4.configure(fg=_fgcolorlight)
+        self.Label4.configure(background=_lightwindowbackground)
 
         self.current_color = StringVar(top)
         self.current_color.set('Red')
@@ -125,21 +147,38 @@ class New_Toplevel_1:
         self.dropdown_menu = OptionMenu(top,self.current_color,*self.colors, command = self.Dropdown_Changed)
         self.dropdown_menu.pack(side = 'top', anchor = 'w')
         self.dropdown_menu.place(relx=0.78, rely=0.40, height=18, width=100)
+        self.dropdown_menu.configure(activebackground=_activebgcolordark)
+        self.dropdown_menu.configure(background=_bgcolorlight)
+        self.dropdown_menu.configure(fg=_fgcolorlight)
+        self.dropdown_menu['menu'].configure(activebackground=_activebgcolordark)
+        self.dropdown_menu['menu'].configure(background=_bgcolorlight)
+        self.dropdown_menu['menu'].configure(fg=_fgcolorlight)
 
         self.color_input = Entry(top)
         self.color_input.place(relx=0.78, rely=0.47, relheight=0.05, relwidth=0.10)
-        self.color_input.configure(background="white")
+        self.color_input.configure(background=_bgcolorlight)
         self.color_input.configure(font="TkFixedFont")
-        self.color_input.insert(0, '#ABCDEF')
-        self.color_input.configure(fg='#000000')
+        self.color_input.insert(0, '#FF0000')
+        self.color_input.configure(fg=_fgcolorlight)
 
         self.bt_go = Button(top)
         self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
-        self.bt_go.configure(activebackground="#d9d9d9")
-        self.bt_go.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.Canvas1))
+        self.bt_go.configure(activebackground=_activebgcolordark)
+        self.bt_go.configure(command= lambda: gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.theme, self.Canvas1))
         self.bt_go.configure(cursor="fleur")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
+        self.bt_go.configure(background=_bgcolorlight)
+        self.bt_go.configure(fg=_fgcolorlight)
+
+        self.bt_themeswitch = Button(top)
+        self.bt_themeswitch.place(relx=0.8, rely=0.85, height=26, width=100)
+        self.bt_themeswitch.configure(activebackground=_activebgcolordark)
+        self.bt_themeswitch.configure(background=_bgcolorlight)
+        self.bt_themeswitch.configure(cursor="fleur")
+        self.bt_themeswitch.configure(text='Dark Theme')
+        self.bt_themeswitch.configure(command=self.changeTheme)
+        self.bt_themeswitch.configure(fg=_fgcolorlight)
 
     def Dropdown_Changed(self, current_color):
         color = '#000000'
@@ -156,16 +195,87 @@ class New_Toplevel_1:
         self.color_input.delete(0,100)
         self.color_input.insert(0,color)
 
+    def changeTheme(self):
+        if self.bt_themeswitch['text']=='Light Theme':
+            self.bt_themeswitch.configure(text='Dark Theme')
+            self.Canvas1.configure(background=_bgcolorlight)
+            self.fx.configure(background=_bgcolorlight)
+            self.fx.configure(fg=_fgcolorlight)
+            self.fx,configure(insertbackground=_fgcolorlight)
+            self.x_lower.configure(background=_bgcolorlight)
+            self.x_lower.configure(fg=_fgcolorlight)
+            self.x_upper.configure(background=_bgcolorlight)
+            self.x_upper.configure(fg=_fgcolorlight)
+            self.bt_plot.configure(activebackground=_activebgcolordark)
+            self.dropdown_menu.configure(activebackground=_activebgcolordark)
+            self.color_input.configure(background=_bgcolorlight)
+            self.color_input.configure(fg=_fgcolorlight)
+            self.bt_go.configure(activebackground=_activebgcolordark)
+            self.bt_themeswitch.configure(activebackground=_activebgcolordark)
+            self.Label1.configure(background=_lightwindowbackground)
+            self.Label1.configure(fg=_fgcolorlight)
+            self.Label2.configure(background=_lightwindowbackground)
+            self.Label2.configure(fg=_fgcolorlight)
+            self.Label3.configure(background=_lightwindowbackground)
+            self.Label3.configure(fg=_fgcolorlight)
+            self.Label4.configure(background=_lightwindowbackground)
+            self.Label4.configure(fg=_fgcolorlight)
+            self.bt_go.configure(background=_bgcolorlight)
+            self.bt_go.configure(fg=_fgcolorlight)
+            self.bt_plot.configure(background=_bgcolorlight)
+            self.bt_plot.configure(fg=_fgcolorlight)
+            self.bt_themeswitch.configure(background=_bgcolorlight)
+            self.bt_themeswitch.configure(fg=_fgcolorlight)
+            self.dropdown_menu.configure(background=_bgcolorlight)
+            self.dropdown_menu.configure(fg=_fgcolorlight)
+            self.dropdown_menu['menu'].configure(fg=_fgcolorlight)
+            self.dropdown_menu['menu'].configure(background=_bgcolorlight)
+            self.dropdown_menu['menu'].configure(activebackground=_activebgcolordark)
+            self.theme = 'light'
+            root.configure(background=_lightwindowbackground)
+        else:
+            self.bt_themeswitch.configure(text='Light Theme')
+            self.Canvas1.configure(background=_bgcolordark)
+            self.fx.configure(background=_bgcolordark)
+            self.fx.configure(fg=_fgcolordark)
+            self.fx.configure(insertbackground=_fgcolordark)
+            self.x_lower.configure(background=_bgcolordark)
+            self.x_lower.configure(fg=_fgcolordark)
+            self.x_upper.configure(background=_bgcolordark)
+            self.x_upper.configure(fg=_fgcolordark)
+            self.bt_plot.configure(activebackground=_activebgcolordark)
+            self.dropdown_menu.configure(activebackground=_activebgcolordark)
+            self.color_input.configure(background=_bgcolordark)
+            self.color_input.configure(fg=_fgcolordark)
+            self.bt_go.configure(activebackground=_activebgcolordark)
+            self.bt_themeswitch.configure(activebackground=_activebgcolordark)
+            self.Label1.configure(background=_darkwindowbackground)
+            self.Label1.configure(fg=_fgcolordark)
+            self.Label2.configure(background=_darkwindowbackground)
+            self.Label2.configure(fg=_fgcolordark)
+            self.Label3.configure(background=_darkwindowbackground)
+            self.Label3.configure(fg=_fgcolordark)
+            self.Label4.configure(background=_darkwindowbackground)
+            self.Label4.configure(fg=_fgcolordark)
+            self.bt_go.configure(background=_bgcolordark)
+            self.bt_go.configure(fg=_fgcolordark)
+            self.bt_plot.configure(background=_bgcolordark)
+            self.bt_plot.configure(fg=_fgcolordark)
+            self.bt_themeswitch.configure(background=_bgcolordark)
+            self.bt_themeswitch.configure(fg=_fgcolordark)
+            self.dropdown_menu.configure(background=_bgcolordark)
+            self.dropdown_menu.configure(fg=_fgcolordark)
+            self.dropdown_menu['menu'].configure(fg=_fgcolordark)
+            self.dropdown_menu['menu'].configure(background=_bgcolordark)
+            self.theme = 'dark'
+            root.configure(background=_darkwindowbackground)
+        gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(), self.color_input.get(), self.theme, self.Canvas1)
+
     @staticmethod
     def popup1(event):
         Popupmenu1 = Menu(root, tearoff=0)
         Popupmenu1.configure(activebackground="#f9f9f9")
         Popupmenu1.post(event.x_root, event.y_root)
-
-
-
-
-
 
 if __name__ == '__main__':
     vp_start_gui()

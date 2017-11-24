@@ -29,6 +29,7 @@ parser.add_option('-c', '--color', dest='color', help='Enter the color for plot'
 parser.add_option('-x', '--xlabel',dest='xlabel', help='Enter the x-label for plot')
 parser.add_option('-y', '--ylabel',dest='ylabel', help='Enter the y-label for plot')
 parser.add_option('-l', '--line', dest='line', help='Enter 2 Arrays of X and Y Coordinates like [x1,x2,x3,...,xn],[y1,y2,y3,...,yn]')
+parser.add_option('-t', '--theme', dest='theme', help='Enter theme for displaying plot (dark or light possible)')
 
 (options, args) = parser.parse_args()
 
@@ -45,6 +46,12 @@ if options.xlabel:
 if options.ylabel:
 	ylabel = str(options.ylabel)
 
+
+if options.theme:
+    theme = str(options.theme)
+else:
+    theme = 'default'
+
 if options.func:
     func = options.func
 
@@ -57,10 +64,10 @@ if options.func:
     if options.stepsize:
     	stepsize = int(options.stepsize)
 
-    plu.plot(func, xstart, xend, stepsize, color, xlabel, ylabel, False)
+    plu.plot(func, xstart, xend, stepsize, color, xlabel, ylabel, theme, False)
 
 else: #no function try to take points for line
     xypoints = options.line
-    plu.plot_line(xypoints, color, xlabel, ylabel, False)
+    plu.plot_line(xypoints, color, xlabel, ylabel, theme, False)
 
 # visualise using matplotlib

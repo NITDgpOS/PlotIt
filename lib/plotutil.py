@@ -2,6 +2,7 @@ import os
 import re
 from math import *
 import matplotlib.pyplot as plt
+import matplotlib.style as mplstyle
 from matplotlib import colors as mcolors
 
 def create_y_values(func, xvals):
@@ -17,7 +18,7 @@ def create_y_values(func, xvals):
 			return
 	return yvals
 
-def plot(func, xstart, xend, step, color_name, xlabel, ylabel, gui):
+def plot(func, xstart, xend, step, color_name, xlabel, ylabel, theme, gui):
 	# show plot summary
 
 	print '***** Plot Summary *****'
@@ -28,6 +29,11 @@ def plot(func, xstart, xend, step, color_name, xlabel, ylabel, gui):
 	print 'Color: {}'.format(color_name)
 	print 'X-label: {}'.format(xlabel)
 	print 'Y-label: {}'.format(ylabel)
+
+	if theme == 'dark':
+		mplstyle.use('dark_background')
+	else:
+		mplstyle.use('default')
 
 	xvals = []
 	i = xstart
@@ -59,7 +65,7 @@ def plot(func, xstart, xend, step, color_name, xlabel, ylabel, gui):
 	plt.cla()
 	plt.clf()
 
-def plot_line(arrays, color_name, xlabel, ylabel, gui):
+def plot_line(arrays, color_name, xlabel, ylabel, theme, gui):
 	# show plot summary
 
 	print '***** Plot Summary *****'
@@ -67,6 +73,11 @@ def plot_line(arrays, color_name, xlabel, ylabel, gui):
 	print 'Color: {}'.format(color_name)
 	print 'X-label: {}'.format(xlabel)
 	print 'Y-label: {}'.format(ylabel)
+
+	if theme == 'dark':
+		mplstyle.use('dark_background')
+	else:
+		mplstyle.use('default')
 
 	try:
 		#check if color is hex code
