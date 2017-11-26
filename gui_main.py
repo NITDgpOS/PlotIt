@@ -201,7 +201,7 @@ class New_Toplevel_1:
             self.Canvas1.configure(background=_bgcolorlight)
             self.fx.configure(background=_bgcolorlight)
             self.fx.configure(fg=_fgcolorlight)
-            self.fx,configure(insertbackground=_fgcolorlight)
+            self.fx.configure(insertbackground=_fgcolorlight)
             self.x_lower.configure(background=_bgcolorlight)
             self.x_lower.configure(fg=_fgcolorlight)
             self.x_upper.configure(background=_bgcolorlight)
