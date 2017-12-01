@@ -13,7 +13,7 @@ ylabel = "Y-axis"
 # handle case if user presses Ctrl + C, show proper message while shutting down
 
 def sigint_handler(signum, frame):
-    print 'shutting down PlotIt...'
+    print('shutting down PlotIt...')
     exit(0)
 
 signal.signal(signal.SIGINT, sigint_handler)
@@ -34,17 +34,17 @@ parser.add_option('-t', '--theme', dest='theme', help='Enter theme for displayin
 (options, args) = parser.parse_args()
 
 if not options.func and not options.line:
-	print 'Please enter a function or 2 arrays of x and y coordinates to visualise'
-	exit(0)
+    print('Please enter a function or 2 arrays of x and y coordinates to visualise')
+    exit(0)
 
 if options.color:
-	color = str(options.color)
+    color = str(options.color)
 
 if options.xlabel:
-	xlabel = str(options.xlabel)
+    xlabel = str(options.xlabel)
 
 if options.ylabel:
-	ylabel = str(options.ylabel)
+    ylabel = str(options.ylabel)
 
 
 if options.theme:
@@ -56,13 +56,13 @@ if options.func:
     func = options.func
 
     if options.xstart:
-    	xstart = int(options.xstart)
+        xstart = int(options.xstart)
 
     if options.xend:
-    	xend = int(options.xend)
+        xend = int(options.xend)
 
     if options.stepsize:
-    	stepsize = int(options.stepsize)
+        stepsize = int(options.stepsize)
 
     plu.plot(func, xstart, xend, stepsize, color, xlabel, ylabel, theme, False)
 
