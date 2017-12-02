@@ -22,14 +22,18 @@ except ImportError:
 from PIL import Image, ImageTk
 from lib import plotutil as plu
 
-def Plot(fx, x_l, x_u, color_name, theme, canvas):
-    plu.plot(fx, int(x_l), int(x_u), 1.0, color_name, 'X-axis', 'Y-axis', theme, True)
 
-    gif1 = ImageTk.PhotoImage(image=Image.open(".temp/generated_plot.png").resize((400,300),Image.ANTIALIAS))
-    canvas.create_image(5,10, image = gif1, anchor = NW)
-    canvas.gif1=gif1
+def Plot(fx, x_l, x_u, color_name, theme, canvas):
+
+    plu.plot(fx, int(x_l), int(x_u), 1.0,
+             color_name, 'X-axis', 'Y-axis', theme, True)
+    image = Image.open(".temp/generated_plot.png").resize((400, 300))
+    gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
+    canvas.create_image(5, 10, image=gif1, anchor=NW)
+    canvas.gif1 = gif1
 
     sys.stdout.flush()
+
 
 def init(top, gui, *args, **kwargs):
     global w, top_level, root
@@ -37,12 +41,14 @@ def init(top, gui, *args, **kwargs):
     top_level = top
     root = top
 
+
 def destroy_window():
     # Function which closes the window.
     global top_level
     top_level.destroy()
     top_level = None
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     import gui_main
     gui_main.vp_start_gui()

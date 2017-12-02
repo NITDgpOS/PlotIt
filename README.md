@@ -10,9 +10,14 @@ A terminal based tool to visualise mathematical functions.
   matplotlib, a python librarty to visualise graphs and PIL. If it is not working and is showing
   permission denied error, then try ``` sudo pip install -r requirements.txt ```.
 - Tkinter library is required for GUI components, if it is not already installed then install it
-  using ``` sudo apt-get install python-tk ```
+  using
+  ```
+  sudo apt-get install python-tk
+  ```
 - The project requires ImageTk. If it is not already installed then install it using
-  ``` sudo apt-get install python-imaging-tk ```
+  ```
+  sudo apt-get install python-imaging-tk
+  ```
 
 Thats it, you are all set to go !!
 
@@ -43,6 +48,7 @@ python plotit.py -f 'x**3 + x**2 + x'
 python plotit.py -f 'exp(x)'
 
 ```
+
 ### PlotIt GUI
 
 PlotIt also provides a simple GUI to enter your function and visualise it. In order to use GUI instead
@@ -59,6 +65,15 @@ Before going for GUI mode, make sure you have installed Tkinter, PIL and ImageTk
 
 If you want to contribute to this project then have a look [here](https://github.com/NIT-dgp/PlotIt/blob/master/CONTRIBUTING.md)
 
+**PlotIt** uses Flake8 as a code-linter. Before you commit your code, check the code against the linter rules by running the following command from the `root` of the project.
+
+```
+flake8 .
+
+```
+
+If there are no violations, you are good to go! Otherwise you need to solve the violations before creating a pull request.
+
 ## Future Milestones
 
 - Allowing user to customise plot
@@ -66,4 +81,3 @@ If you want to contribute to this project then have a look [here](https://github
 - Adding a config (perhaps json) file to configure the app and visualisations
 - Creating an interactive shell
 - Enhancing GUI and adding more options
-
