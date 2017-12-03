@@ -83,6 +83,7 @@ class New_Toplevel_1:
         self.Canvas1.configure(relief=RIDGE)
         self.Canvas1.configure(selectbackground="#c4c4c4")
         self.Canvas1.configure(width=394)
+        self.Canvas1.bind('<Configure>', self.resize_plot)
 
         self.fx = Entry(top)
         self.fx.place(relx=0.11, rely=0.85, relheight=0.05, relwidth=0.53)
@@ -291,6 +292,11 @@ class New_Toplevel_1:
 
         gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(),
                          self.color_input.get(), self.theme, self.Canvas1)
+
+    def resize_plot(self, event):
+        if gui_support.plotted:
+            gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(),
+                             self.color_input.get(), self.theme, self.Canvas1)
 
     @staticmethod
     def popup1(event):
