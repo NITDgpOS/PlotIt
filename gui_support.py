@@ -22,15 +22,24 @@ except ImportError:
 from PIL import Image, ImageTk
 from lib import plotutil as plu
 
+# Global variable to check if any function has been plotted
+plotted = False
+
 
 def Plot(fx, x_l, x_u, color_name, theme, canvas):
 
-    plu.plot(fx, int(x_l), int(x_u), 1.0,
-             color_name, 'X-axis', 'Y-axis', theme, True)
-    image = Image.open(".temp/generated_plot.png").resize((400, 300))
-    gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
-    canvas.create_image(5, 10, image=gif1, anchor=NW)
-    canvas.gif1 = gif1
+    global plotted
+    if fx:
+        plu.plot(fx, int(x_l), int(x_u), 1.0,
+                 color_name, 'X-axis', 'Y-axis', theme, True)
+        image = Image.open(".temp/generated_plot.png").resize(
+            (canvas.winfo_width(), canvas.winfo_height()))
+        gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
+        canvas.create_image(0, 0, image=gif1, anchor=NW)
+        canvas.gif1 = gif1
+        plotted = True
+    else:
+        canvas.delete(ALL)
 
     sys.stdout.flush()
 
