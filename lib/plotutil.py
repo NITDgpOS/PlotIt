@@ -20,28 +20,31 @@ def create_y_values(func, xvals):
     return yvals
 
 
-def plot(func, xstart, xend, step, color_name, xlabel, ylabel, theme, gui):
+def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, discrete=False):
 
     # Show plot summary
     print('***** Plot Summary *****')
-    print('Funtion: {}'.format(func))
-    print('Starting abcissa: {}'.format(xstart))
-    print('Ending abcissa: {}'.format(xend))
-    print('Step size: {}'.format(step))
-    print('Color: {}'.format(color_name))
-    print('X-label: {}'.format(xlabel))
-    print('Y-label: {}'.format(ylabel))
+    print("Funtion: {}".format(func))
+
+    if discrete:
+        print("Plotting funcion for points: {}".format(', '.join(map(str, xpoints))))
+    else:
+        print("Starting abcissa: {}".format(xpoints[0]))
+        print("Ending abcissa: {}".format(xpoints[-1]))
+        if (len(xpoints) > 1):
+            print("Stepsize: {}".format(xpoints[1] - xpoints[0]))
+
+    print("Color: {}".format(color_name))
+    print("X-label: {}".format(xlabel))
+    print("Y-label: {}".format(ylabel))
+    print()
 
     if theme == 'dark':
         mplstyle.use('dark_background')
     else:
         mplstyle.use('default')
 
-    xvals = []
-    i = xstart
-    while i <= xend:
-        xvals.append(i)
-        i += step
+    xvals = xpoints
     yvals = create_y_values(func, xvals)
 
     try:

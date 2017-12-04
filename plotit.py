@@ -36,6 +36,9 @@ parser.add_option('-x', '--xlabel', dest='xlabel',
                   help='Enter the x-label for plot')
 parser.add_option('-y', '--ylabel', dest='ylabel',
                   help='Enter the y-label for plot')
+parser.add_option('-p', '--points', dest='xpoints',
+                  help='Enter discrete x values for which the \
+                  function will be plotted like [x1,x2,x3,...,xn]')
 parser.add_option('-l', '--line', dest='line',
                   help='Enter 2 Arrays of X and Y Coordinates like \
                   [x1,x2,x3,...,xn],[y1,y2,y3,...,yn]')
@@ -66,18 +69,34 @@ else:
 if options.func:
     func = options.func
 
-    if options.xstart:
-        xstart = int(options.xstart)
+    if options.xpoints and (options.xstart or options.xend or options.stepsize):
+        parser.error("Can't use either of xstart, xend or stepsize \
+                     with the option xpoints")
+    elif options.xpoints:
+        xpoints = list(map(float, options.xpoints[1:-1].split(',')))
+        discrete = True
+    else:
+        if options.xstart:
+            xstart = int(options.xstart)
+        else:
+            xstart = 0
 
-    if options.xend:
-        xend = int(options.xend)
+        if options.xend:
+            xend = int(options.xend)
+        else:
+            xend = 100
 
-    if options.stepsize:
-        stepsize = int(options.stepsize)
+        if options.stepsize:
+            stepsize = int(options.stepsize)
+        else:
+            stepsize = 1
 
-    plu.plot(func, xstart, xend, stepsize, color, xlabel, ylabel, theme, False)
+        xpoints = range(xstart, xend + 1, stepsize)
+        discrete = False
 
-else:  # no function try to take points for line
+    plu.plot(func, xpoints, color, xlabel, ylabel, theme, False, discrete)
+
+else:  # No function, hence try to take points for line
     xypoints = options.line
     plu.plot_line(xypoints, color, xlabel, ylabel, theme, False)
 
