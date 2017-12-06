@@ -91,8 +91,8 @@ class New_Toplevel_1:
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
         self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(),
-                                                            self.x_lower.get(),
-                                                            self.x_upper.get(),
+                                                            range(int(self.x_lower.get()),
+                                                                  int(self.x_upper.get())),
                                                             self.color_input.get(),
                                                             self.theme,
                                                             self.Canvas1))
@@ -137,8 +137,8 @@ class New_Toplevel_1:
         self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
         self.bt_plot.configure(activebackground=_activebgcolordark)
         self.bt_plot.configure(command=lambda: gui_support.Plot(self.fx.get(),
-                                                                self.x_lower.get(),
-                                                                self.x_upper.get(),
+                                                                range(int(self.x_lower.get()),
+                                                                      int(self.x_upper.get())),
                                                                 self.color_input.get(),
                                                                 self.theme,
                                                                 self.Canvas1))
@@ -180,8 +180,8 @@ class New_Toplevel_1:
         self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
         self.bt_go.configure(activebackground=_activebgcolordark)
         self.bt_go.configure(command=lambda: gui_support.Plot(self.fx.get(),
-                                                              self.x_lower.get(),
-                                                              self.x_upper.get(),
+                                                              range(int(self.x_lower.get()),
+                                                                    int(self.x_upper.get())),
                                                               self.color_input.get(),
                                                               self.theme,
                                                               self.Canvas1))
@@ -295,8 +295,9 @@ class New_Toplevel_1:
 
     def resize_plot(self, event):
         if gui_support.plotted:
-            gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(),
-                             self.color_input.get(), self.theme, self.Canvas1)
+            gui_support.Plot(self.fx.get(), range(int(self.x_lower.get()),
+                             int(self.x_upper.get())), self.color_input.get(),
+                             self.theme, self.Canvas1)
 
     @staticmethod
     def popup1(event):
