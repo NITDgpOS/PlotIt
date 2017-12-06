@@ -33,5 +33,15 @@ guidelines below.
 - After Commit message there should follow a commit body where you can mention what you
   did in short or in detail
 
-Please try to follow this format as it will be helpul for maintainers as well as co-developers/contributors
+Please try to follow this format as it will be helpful for maintainers as well as co-developers/contributors
 to stay aligned.
+
+## Resources
+
+- This project uses Matplotlib as a core library to generate visualisations. Find more information on Matplotlib [here](https://matplotlib.org/users/pyplot_tutorial.html)
+
+- The ImageTk module contains support to create and modify Tkinter BitmapImage and PhotoImage objects from PIL images. Find more information on ImageTk [here](http://pillow.readthedocs.io/en/3.1.x/reference/ImageTk.html)
+
+- Pillow is the library that adds support for opening, manipulating, and saving many different image file formats. Find more information on Pillow [here](http://www.pythonforbeginners.com/gui/how-to-use-pillow)
+
+- Tkinter is the standard GUI library. Find more information on ImageTk [here](http://python-textbok.readthedocs.io/en/1.0/Introduction_to_GUI_Programming.html)
