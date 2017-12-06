@@ -2,6 +2,13 @@
 
 A terminal based tool to visualise mathematical functions.
 
+## Dependencies
+
+- Matplotlib
+- Pillow
+- ImageTk
+- Tkinter
+
 ## Installation
 
 - Clone the repository using ``` git clone https://github.com/djmgit/PlotIt.git ```
