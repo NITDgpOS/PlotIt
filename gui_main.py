@@ -142,7 +142,7 @@ class New_Toplevel_1:
                                                                 self.color_input.get(),
                                                                 self.theme,
                                                                 self.Canvas1))
-        self.bt_plot.configure(cursor="fleur")
+        self.bt_plot.configure(cursor="left_ptr")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
         self.bt_plot.configure(background=_bgcolorlight)
@@ -185,7 +185,7 @@ class New_Toplevel_1:
                                                               self.color_input.get(),
                                                               self.theme,
                                                               self.Canvas1))
-        self.bt_go.configure(cursor="fleur")
+        self.bt_go.configure(cursor="left_ptr")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
         self.bt_go.configure(background=_bgcolorlight)
@@ -195,7 +195,7 @@ class New_Toplevel_1:
         self.bt_themeswitch.place(relx=0.8, rely=0.85, height=26, width=100)
         self.bt_themeswitch.configure(activebackground=_activebgcolordark)
         self.bt_themeswitch.configure(background=_bgcolorlight)
-        self.bt_themeswitch.configure(cursor="fleur")
+        self.bt_themeswitch.configure(cursor="left_ptr")
         self.bt_themeswitch.configure(text='Dark Theme')
         self.bt_themeswitch.configure(command=self.changeTheme)
         self.bt_themeswitch.configure(fg=_fgcolorlight)
