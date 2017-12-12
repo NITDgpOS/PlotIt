@@ -1,6 +1,14 @@
 # PlotIt
 
-A terminal based tool to visualise mathematical functions.
+
+![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg "Made with Python")
+
+
+**A terminal based tool to visualise mathematical functions.**<br>
+
+![alt text](img%20%26%20gif/GUImani.png "main GUI")
+
+![alt text](img%20%26%20gif/GUI.png "GUI interface")
 
 ## Dependencies
 
