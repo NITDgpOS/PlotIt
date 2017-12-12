@@ -8,7 +8,7 @@
 
 
 
-![alt text](https://github.com/nvinayvarma189/PlotIt/blob/PR1/GUI.png "GUI interface")
+![](https://github.com/nvinayvarma189/PlotIt/img-&-gif/GUI.png "GUI interface")
 
 ## Dependencies
 
