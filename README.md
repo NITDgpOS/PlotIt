@@ -6,9 +6,9 @@
 
 **A terminal based tool to visualise mathematical functions.**<br>
 
-![alt text](https://github.com/nvinayvarma189/PlotIt/blob/PR1/img%20%26%20gif/GUImani.png "main GUI")
+![alt text](img%20%26%20gif/GUImani.png "main GUI")
 
-![alt text](https://github.com/nvinayvarma189/PlotIt/blob/PR1/img%20%26%20gif/GUI.png "GUI interface")
+![alt text](img%20%26%20gif/GUI.png "GUI interface")
 
 ## Dependencies
 
