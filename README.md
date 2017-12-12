@@ -1,6 +1,9 @@
 # PlotIt
 
-A terminal based tool to visualise mathematical functions.
+A terminal based tool to visualise mathematical functions.<br>
+
+
+![alt text](https://github.com/nvinayvarma189/PlotIt/blob/PR1/GUI.png "GUI interface")
 
 ## Dependencies
 
