@@ -25,6 +25,7 @@ def vp_start_gui():
     global val, w, root
     root = Tk()
     top = New_Toplevel_1(root)
+    m = Menubar(root)
     gui_support.init(root, top)
     root.protocol('WM_DELETE_WINDOW', destroy_app)
     root.mainloop()
@@ -63,6 +64,22 @@ def destroy_app():
     global root
     root.destroy()
     exit(0)
+
+
+class Menubar:
+    def __init__(self, master):
+        
+        menubar = Menu(root)
+
+        filemenu = Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=filemenu)
+        filemenu.add_command(label="Quit", command=root.destroy)
+
+
+        helpmenu = Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=helpmenu)
+
+        root.config(menu=menubar)
 
 
 class New_Toplevel_1:
