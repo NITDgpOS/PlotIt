@@ -307,7 +307,7 @@ class New_Toplevel_1:
             self.theme = 'dark'
             root.configure(background=_darkwindowbackground)
 
-        gui_support.Plot(self.fx.get(), self.x_lower.get(), self.x_upper.get(),
+        gui_support.Plot(self.fx.get(), range(int(self.x_lower.get()), int(self.x_upper.get())),
                          self.color_input.get(), self.theme, self.Canvas1)
 
     def resize_plot(self, event):
