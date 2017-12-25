@@ -4,7 +4,7 @@
 contributors. So if you have found a bug or have a cool feature in mind which you want to
 add, then please follow the steps given below to contribute to this project.
 
-### Making your your first pull request
+### Making your first pull request
 
 Please open a **new issue** before making any pull request. **Every pull request should
 have a reference to an issue.**
