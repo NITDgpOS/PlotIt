@@ -6,9 +6,9 @@
 
 **A terminal based tool to visualise mathematical functions.**<br>
 
-![alt text](img%20%26%20gif/GUImani.png "main GUI")
+![alt text](images/GUImani.png "main GUI")
 
-![alt text](img%20%26%20gif/GUI.png "GUI interface")
+![alt text](images/GUI.png "GUI interface")
 
 ## Dependencies
 
