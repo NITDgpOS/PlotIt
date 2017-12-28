@@ -91,6 +91,7 @@ class New_Toplevel_1:
         top.title("PlotIt")
 
         self.theme = 'light'
+        self.line_style = '-'
         root.configure(background=_lightwindowbackground)
 
         self.Canvas1 = Canvas(top)
@@ -112,7 +113,7 @@ class New_Toplevel_1:
                                                                   int(self.x_upper.get())),
                                                             self.color_input.get(),
                                                             self.theme,
-                                                            self.Canvas1))
+                                                            self.Canvas1, self.line_style))
         self.fx.configure(fg=_fgcolorlight)
         self.fx.configure(insertbackground=_fgcolorlight)
 
@@ -158,7 +159,7 @@ class New_Toplevel_1:
                                                                       int(self.x_upper.get())),
                                                                 self.color_input.get(),
                                                                 self.theme,
-                                                                self.Canvas1))
+                                                                self.Canvas1, self.line_style))
         self.bt_plot.configure(cursor="left_ptr")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
@@ -201,7 +202,7 @@ class New_Toplevel_1:
                                                                     int(self.x_upper.get())),
                                                               self.color_input.get(),
                                                               self.theme,
-                                                              self.Canvas1))
+                                                              self.Canvas1, self.line_style))
         self.bt_go.configure(cursor="left_ptr")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
@@ -308,13 +309,13 @@ class New_Toplevel_1:
             root.configure(background=_darkwindowbackground)
 
         gui_support.Plot(self.fx.get(), range(int(self.x_lower.get()), int(self.x_upper.get())),
-                         self.color_input.get(), self.theme, self.Canvas1)
+                         self.color_input.get(), self.theme, self.Canvas1, self.line_style)
 
     def resize_plot(self, event):
         if gui_support.plotted:
             gui_support.Plot(self.fx.get(), range(int(self.x_lower.get()),
                              int(self.x_upper.get())), self.color_input.get(),
-                             self.theme, self.Canvas1)
+                             self.theme, self.Canvas1, self.line_style)
 
     @staticmethod
     def popup1(event):
