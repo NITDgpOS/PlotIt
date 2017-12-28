@@ -46,7 +46,7 @@ parser.add_option('-l', '--line', dest='line',
 parser.add_option('-t', '--theme', dest='theme',
                   help='Enter theme for displaying plot (dark or light)')
 parser.add_option('--symbol', dest='line_style',
-				  help='Enter linestyle for plot, accepted linestyle "-", ":", "-.", "--"', choices=["-",":","-.","--"])
+				  help='Enter linestyle for plot, accepted linestyles "-", ":", "-.", "--"', choices=["-",":","-.","--"])
 
 
 (options, args) = parser.parse_args()
