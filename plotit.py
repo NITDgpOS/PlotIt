@@ -9,6 +9,7 @@ stepsize = 1.0
 color = "blue"
 xlabel = "X-axis"
 ylabel = "Y-axis"
+line_style = "-"
 
 
 # Handle case if user presses Ctrl+C, show proper message while shutting down
@@ -44,6 +45,9 @@ parser.add_option('-l', '--line', dest='line',
                   [x1,x2,x3,...,xn],[y1,y2,y3,...,yn]')
 parser.add_option('-t', '--theme', dest='theme',
                   help='Enter theme for displaying plot (dark or light)')
+parser.add_option('--symbol', dest='line_style',
+				  help='Enter linestyle for plot, accepted linestyles "-", ":", "-.", "--"', choices=["-",":","-.","--"])
+
 
 (options, args) = parser.parse_args()
 
@@ -60,11 +64,14 @@ if options.xlabel:
 if options.ylabel:
     ylabel = str(options.ylabel)
 
+if options.line_style:
+	line_style = str(options.line_style)
 
 if options.theme:
     theme = str(options.theme)
 else:
     theme = 'default'
+
 
 if options.func:
     func = options.func
@@ -94,10 +101,10 @@ if options.func:
         xpoints = range(xstart, xend + 1, stepsize)
         discrete = False
 
-    plu.plot(func, xpoints, color, xlabel, ylabel, theme, False, discrete)
+    plu.plot(func, xpoints, color, xlabel, ylabel, theme, False, line_style, discrete)
 
 else:  # No function, hence try to take points for line
     xypoints = options.line
-    plu.plot_line(xypoints, color, xlabel, ylabel, theme, False)
+    plu.plot_line(xypoints, color, xlabel, ylabel, theme, False, line_style)
 
 # Visualise using matplotlib

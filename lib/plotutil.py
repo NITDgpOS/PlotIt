@@ -20,7 +20,7 @@ def create_y_values(func, xvals):
     return yvals
 
 
-def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, discrete=False):
+def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, discrete=False):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -55,7 +55,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, discrete=False):
             if color_name not in colors:
                 print(color_name, ": Color not found.")
                 color_name = 'blue'
-        plt.plot(xvals, yvals, color=color_name, linewidth=2.0)
+        plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
     except Exception:
@@ -73,7 +73,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, discrete=False):
     plt.clf()
 
 
-def plot_line(arrays, color_name, xlabel, ylabel, theme, gui):
+def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -103,7 +103,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui):
                          arrays[arrays.find(']') + 3:len(arrays) - 1].split(',')))
 
         if len(xvals) == len(yvals):
-            plt.plot(xvals, yvals, color=color_name, linewidth=2.0)
+            plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
         else:
