@@ -20,7 +20,7 @@ def create_y_values(func, xvals):
     return yvals
 
 
-def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, discrete=False):
+def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file_path, discrete=False):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -68,12 +68,13 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, disc
         if not os.path.exists('.temp/'):
             os.mkdir('.temp/')
         plt.savefig(".temp/generated_plot.png")
+        plt.savefig(file_path)
 
     plt.cla()
     plt.clf()
 
 
-def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
+def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_path):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -104,6 +105,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
 
         if len(xvals) == len(yvals):
             plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
+            plt.savefig(file_path)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
         else:
@@ -119,6 +121,8 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
         if not os.path.exists('.temp/'):
             os.mkdir('.temp/')
         plt.savefig(".temp/generated_plot.png")
+        plt.savefig(file_path)
+
 
     plt.cla()
     plt.clf()
