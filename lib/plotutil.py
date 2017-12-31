@@ -20,7 +20,7 @@ def create_y_values(func, xvals):
     return yvals
 
 
-def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, discrete=False):
+def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file_path, discrete=False):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -58,10 +58,15 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, disc
         plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
+
     except Exception:
         print("An error occured.")
-
+    
+    if file_path != "":
+        plt.savefig(file_path)
+    
     plt.grid(True)
+
     if not gui:
         plt.show()
     else:
@@ -73,7 +78,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, disc
     plt.clf()
 
 
-def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
+def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_path):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -104,13 +109,22 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
 
         if len(xvals) == len(yvals):
             plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
+            plt.savefig(file_path)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
+            
+            if file_path != "":
+                plt.savefig(file_path)
+        
         else:
             print("Error: You need same number of X and Y values")
+
     except Exception:
         print("An error occured.")
-
+    
+    if file_path != "":
+        plt.savefig(file_path)
+    
     plt.grid(True)
 
     if not gui:
@@ -119,6 +133,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style):
         if not os.path.exists('.temp/'):
             os.mkdir('.temp/')
         plt.savefig(".temp/generated_plot.png")
+
 
     plt.cla()
     plt.clf()
