@@ -58,6 +58,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
         plt.plot(xvals, yvals, color=color_name, linewidth=2.0, linestyle=line_style)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
+        plt.title(r'$ ' + func + ' $')
 
     except Exception:
         print("An error occured.")
@@ -112,6 +113,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
             plt.savefig(file_path)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
+            plt.title(r'$ ' + func + ' $')
             
             if file_path != "":
                 plt.savefig(file_path)
