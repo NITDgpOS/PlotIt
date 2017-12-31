@@ -59,12 +59,12 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
 
-        if file_path != "":
-            plt.savefig(file_path)
-
     except Exception:
         print("An error occured.")
-
+    
+    if file_path != "":
+        plt.savefig(file_path)
+    
     plt.grid(True)
 
     if not gui:
@@ -121,7 +121,10 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
 
     except Exception:
         print("An error occured.")
-
+    
+    if file_path != "":
+        plt.savefig(file_path)
+    
     plt.grid(True)
 
     if not gui:
