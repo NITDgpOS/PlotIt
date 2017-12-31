@@ -10,6 +10,7 @@ color = "blue"
 xlabel = "X-axis"
 ylabel = "Y-axis"
 line_style = "-"
+file_path = ""
 
 
 # Handle case if user presses Ctrl+C, show proper message while shutting down
