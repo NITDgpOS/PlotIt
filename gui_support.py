@@ -26,11 +26,11 @@ from lib import plotutil as plu
 plotted = False
 
 
-def Plot(fx, xpoints, color_name, theme, canvas, line_style):
+def Plot(fx, xpoints, color_name, theme, canvas, line_style, file_path):
 
     global plotted
     if fx:
-        plu.plot(fx, xpoints, color_name, 'X-axis', 'Y-axis', theme, True, line_style)
+        plu.plot(fx, xpoints, color_name, 'X-axis', 'Y-axis', theme, True, line_style, file_path)
         image = Image.open(".temp/generated_plot.png").resize(
             (canvas.winfo_width(), canvas.winfo_height()))
         gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
