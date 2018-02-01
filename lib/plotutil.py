@@ -65,7 +65,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
     
     if file_path != "":
         plt.savefig(file_path)
-    
+
     plt.grid(True)
 
     if not gui:
@@ -113,7 +113,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
             plt.savefig(file_path)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
-            plt.title(r'$ ' + func + ' $')
+            plt.title(r'$ ' + 'Line:' + str(xvals) +','+ str(yvals) + ' $')
             
             if file_path != "":
                 plt.savefig(file_path)
@@ -121,8 +121,63 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
         else:
             print("Error: You need same number of X and Y values")
 
-    except Exception:
-        print("An error occured.")
+    except Exception as e:
+        print("An error occured.",e)
+    
+    if file_path != "":
+        plt.savefig(file_path)
+    
+    plt.grid(True)
+
+    if not gui:
+        plt.show()
+    else:
+        if not os.path.exists('.temp/'):
+            os.mkdir('.temp/')
+        plt.savefig(".temp/generated_plot.png")
+
+
+    plt.cla()
+    plt.clf()
+
+def plot_dot(xyval, color_name, xlabel, ylabel, theme, gui, dot_style, dot_size,file_path):
+
+    # Show plot summary
+    print('***** Plot Summary *****')
+    print('X,Y Value: {}'.format(xyval))
+    print('Color: {}'.format(color_name))
+    print('X-label: {}'.format(xlabel))
+    print('Y-label: {}'.format(ylabel))
+
+    if theme == 'dark':
+        mplstyle.use('dark_background')
+    else:
+        mplstyle.use('default')
+
+    try:
+        # Check if color is hex code
+        is_hex = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', color_name)
+        if not is_hex:
+            colors = mcolors.cnames
+            if color_name not in colors:
+                print(color_name, ": Color not found.")
+                color_name = 'blue'
+
+
+        #Extract x-value from xyval string
+        xval=float(xyval.split(',')[0])
+        #Extract y-value from xyval string
+        yval=float(xyval.split(',')[1])
+
+        
+        plt.plot(xval, yval, color=color_name, markersize=dot_size, marker=dot_style)
+        plt.savefig(file_path)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.title(r'$ ' + xyval + ' $')
+        
+    except Exception as e:
+        print("An error occured.",e)
     
     if file_path != "":
         plt.savefig(file_path)
