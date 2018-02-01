@@ -2,3 +2,4 @@
 .temp/
 venv/
 .png
+test.py
