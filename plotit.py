@@ -44,10 +44,11 @@ parser.add_option('-p', '--points', dest='xpoints',
                   help='Enter discrete x values for which the \
                   function will be plotted like [x1,x2,x3,...,xn]')
 parser.add_option('-d', '--dot', dest='dot', help='Enter comma separated X and Y points like\
-                   5,9 to plot a dot at x=5,y=9 coordinates.')
+                    5,9,4,7,4,6 to plot the dots at\
+                    (5,9),(4,7),(4,6) coordinates.')
 parser.add_option('-l', '--line', dest='line',
                   help='Enter 2 Arrays of X and Y Coordinates like \
-                  [x1,x2,x3,...,xn],[y1,y2,y3,...,yn]')
+                  \'[x1,x2,x3,...,xn],[y1,y2,y3,...,yn]\'')
 parser.add_option('-t', '--theme', dest='theme',
                   help='Enter theme for displaying plot (dark or light)')
 parser.add_option('--symbol', dest='line_style', 
@@ -115,7 +116,7 @@ if options.func:
 
 elif options.dot:
     xyval = options.dot
-    plu.plot_dot(xyval, color, xlabel, ylabel, theme, False, dot_style, dot_size, file_path)
+    plu.plot_dot(xyval, color, xlabel, ylabel, theme, False, dot_style, file_path)
 
 elif options.line:
     xypoints = options.line

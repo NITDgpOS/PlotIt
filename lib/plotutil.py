@@ -121,8 +121,8 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
         else:
             print("Error: You need same number of X and Y values")
 
-    except Exception as e:
-        print("An error occured.",e)
+    except Exception:
+        print("An error occured.")
     
     if file_path != "":
         plt.savefig(file_path)
@@ -140,7 +140,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
     plt.cla()
     plt.clf()
 
-def plot_dot(xyval, color_name, xlabel, ylabel, theme, gui, dot_style, dot_size,file_path):
+def plot_dot(xyval, color_name, xlabel, ylabel, theme, gui, dot_style, file_path):
 
     # Show plot summary
     print('***** Plot Summary *****')
@@ -163,34 +163,37 @@ def plot_dot(xyval, color_name, xlabel, ylabel, theme, gui, dot_style, dot_size,
                 print(color_name, ": Color not found.")
                 color_name = 'blue'
 
-
-        #Extract x-value from xyval string
-        xval=float(xyval.split(',')[0])
-        #Extract y-value from xyval string
-        yval=float(xyval.split(',')[1])
-
+        xy=xyval.split(',')
+        l=len(xy)
+        #Check if even number of arguments are given
+        if (l%2==0):
+            #Extract x-values from xyval string
+            xval=[float(xy[i]) for i in range(0,l,2)]
+            #Extract y-values from xyval string
+            yval=[float(xy[i]) for i in range(1,l+1,2)]
         
-        plt.plot(xval, yval, color=color_name, markersize=dot_size, marker=dot_style)
-        plt.savefig(file_path)
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
-        plt.title(r'$ ' + xyval + ' $')
+            plt.scatter(xval, yval, color=color_name, marker=dot_style)
+            plt.savefig(file_path)
+            plt.xlabel(xlabel)
+            plt.ylabel(ylabel)
+            plt.title(r'$ ' + xyval + ' $')
+
+            if file_path != "":
+                plt.savefig(file_path)
+            
+            plt.grid(True)
+
+            if not gui:
+                plt.show()
+            else:
+                if not os.path.exists('.temp/'):
+                    os.mkdir('.temp/')
+                plt.savefig(".temp/generated_plot.png")           
+        else:
+            print("Cannot plot odd Number of Coordinates")
         
     except Exception as e:
         print("An error occured.",e)
     
-    if file_path != "":
-        plt.savefig(file_path)
-    
-    plt.grid(True)
-
-    if not gui:
-        plt.show()
-    else:
-        if not os.path.exists('.temp/'):
-            os.mkdir('.temp/')
-        plt.savefig(".temp/generated_plot.png")
-
-
     plt.cla()
     plt.clf()
