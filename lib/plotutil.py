@@ -65,7 +65,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
     
     if file_path != "":
         plt.savefig(file_path)
-    
+
     plt.grid(True)
 
     if not gui:
@@ -113,7 +113,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
             plt.savefig(file_path)
             plt.xlabel(xlabel)
             plt.ylabel(ylabel)
-            plt.title(r'$ ' + func + ' $')
+            plt.title(r'$ ' + 'Line:' + str(xvals) +','+ str(yvals) + ' $')
             
             if file_path != "":
                 plt.savefig(file_path)
@@ -137,5 +137,63 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
         plt.savefig(".temp/generated_plot.png")
 
 
+    plt.cla()
+    plt.clf()
+
+def plot_dot(xyval, color_name, xlabel, ylabel, theme, gui, dot_style, file_path):
+
+    # Show plot summary
+    print('***** Plot Summary *****')
+    print('X,Y Value: {}'.format(xyval))
+    print('Color: {}'.format(color_name))
+    print('X-label: {}'.format(xlabel))
+    print('Y-label: {}'.format(ylabel))
+
+    if theme == 'dark':
+        mplstyle.use('dark_background')
+    else:
+        mplstyle.use('default')
+
+    try:
+        # Check if color is hex code
+        is_hex = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', color_name)
+        if not is_hex:
+            colors = mcolors.cnames
+            if color_name not in colors:
+                print(color_name, ": Color not found.")
+                color_name = 'blue'
+
+        xy=xyval.split(',')
+        l=len(xy)
+        #Check if even number of arguments are given
+        if (l%2==0):
+            #Extract x-values from xyval string
+            xval=[float(xy[i]) for i in range(0,l,2)]
+            #Extract y-values from xyval string
+            yval=[float(xy[i]) for i in range(1,l+1,2)]
+        
+            plt.scatter(xval, yval, color=color_name, marker=dot_style)
+            plt.savefig(file_path)
+            plt.xlabel(xlabel)
+            plt.ylabel(ylabel)
+            plt.title(r'$ ' + xyval + ' $')
+
+            if file_path != "":
+                plt.savefig(file_path)
+            
+            plt.grid(True)
+
+            if not gui:
+                plt.show()
+            else:
+                if not os.path.exists('.temp/'):
+                    os.mkdir('.temp/')
+                plt.savefig(".temp/generated_plot.png")           
+        else:
+            print("Cannot plot odd Number of Coordinates")
+        
+    except Exception as e:
+        print("An error occured.",e)
+    
     plt.cla()
     plt.clf()
