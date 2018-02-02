@@ -73,7 +73,7 @@ class Menubar:
 
         filemenu = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=filemenu)
-        filemenu.add_command(label="Quit", command=root.destroy)
+        filemenu.add_command(label="Quit", command=root.quit)
 
 
         helpmenu = Menu(menubar, tearoff=0)
