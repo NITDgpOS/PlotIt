@@ -19,7 +19,7 @@
 
 ## Installation
 
-- Clone the repository using ``` git clone https://github.com/djmgit/PlotIt.git ```
+- Clone the repository using ``` git clone https://github.com/NITDgpOS/PlotIt.git ```
 - Enter into the repository and open in terminal
 - Run ``` pip install -r requirements.txt ``` This will install the only dependency (as of now) that is
   matplotlib, a python librarty to visualise graphs and PIL. If it is not working and is showing
