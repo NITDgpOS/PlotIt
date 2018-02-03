@@ -6,9 +6,10 @@
 
 try:
     from Tkinter import *
+    import tkFileDialog as fdialog
 except ImportError:
     from tkinter import *
-    from tkinter import filedialog
+    from tkinter import filedialog as fdialog
 
 try:
     import ttk
@@ -67,7 +68,7 @@ def destroy_app():
     exit(0)
 
 def save_file():
-    file=filedialog.asksaveasfile(mode="wb", title="Save Figure", defaultextension=".png", filetypes = (("png files","*.png"),("all files","*.*")))
+    file=fdialog.asksaveasfile(mode="wb", title="Save Figure", defaultextension=".png", filetypes = (("png files","*.png"),("all files","*.*")))
     if file is None:
         return None
     img_to_save=open(".temp/generated_plot.png","rb").read()
