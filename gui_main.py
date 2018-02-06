@@ -6,8 +6,10 @@
 
 try:
     from Tkinter import *
+    import tkFileDialog as fdialog
 except ImportError:
     from tkinter import *
+    from tkinter import filedialog as fdialog
 
 try:
     import ttk
@@ -65,6 +67,14 @@ def destroy_app():
     root.destroy()
     exit(0)
 
+def save_file():
+    file=fdialog.asksaveasfile(mode="wb", title="Save Figure", defaultextension=".png", filetypes = (("png files","*.png"),("all files","*.*")))
+    if file is None:
+        return None
+    img_to_save=open(".temp/generated_plot.png","rb").read()
+    file.write(img_to_save)
+    file.close()
+
 
 class Menubar:
     def __init__(self, master):
@@ -73,6 +83,7 @@ class Menubar:
 
         filemenu = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=filemenu)
+        filemenu.add_command(label="Save", command=save_file)
         filemenu.add_command(label="Quit", command=root.destroy)
 
 
