@@ -75,6 +75,9 @@ def save_file():
     file.write(img_to_save)
     file.close()
 
+def toArray(str1,str2):
+    return("["+str1+"],["+str2+"]")
+
 
 class Menubar:
     def __init__(self, master):
@@ -91,6 +94,9 @@ class Menubar:
         menubar.add_cascade(label="Help", menu=helpmenu)
 
         root.config(menu=menubar)
+# class OptionDialog:
+#     def __init__(self, master):
+        
 
 
 class New_Toplevel_1:
@@ -98,7 +104,7 @@ class New_Toplevel_1:
         """This class configures and populates the toplevel window.
            top is the toplevel containing window."""
 
-        top.geometry("555x398+408+185")
+        top.geometry("600x460+408+120")
         top.title("PlotIt")
 
         self.theme = 'light'
@@ -107,7 +113,7 @@ class New_Toplevel_1:
         root.configure(background=_lightwindowbackground)
 
         self.Canvas1 = Canvas(top)
-        self.Canvas1.place(relx=0.04, rely=0.05, relheight=0.75, relwidth=0.72)
+        self.Canvas1.place(relx=0.04, rely=0.05, relheight=0.70, relwidth=0.69)
         self.Canvas1.configure(background=_bgcolorlight)
         self.Canvas1.configure(borderwidth="2")
         self.Canvas1.configure(relief=RIDGE)
@@ -116,7 +122,7 @@ class New_Toplevel_1:
         self.Canvas1.bind('<Configure>', self.resize_plot)
 
         self.fx = Entry(top)
-        self.fx.place(relx=0.11, rely=0.85, relheight=0.05, relwidth=0.53)
+        self.fx.place(relx=0.11, rely=0.82, relheight=0.05, relwidth=0.53)
         self.fx.configure(background=_bgcolorlight)
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
@@ -129,11 +135,48 @@ class New_Toplevel_1:
         self.fx.configure(fg=_fgcolorlight)
         self.fx.configure(insertbackground=_fgcolorlight)
 
+
+        self.xpoints = ttk.Entry(top)
+        self.xpoints.place(relx=0.11, rely=0.92, relheight=0.04, relwidth=0.25)
+        self.xpoints.configure(width=374,cursor="xterm",background=_bgcolorlight,takefocus="True")
+
+        self.ypoints = ttk.Entry(top)
+        self.ypoints.place(relx=0.39, rely=0.92, relheight=0.04, relwidth=0.25)
+        self.ypoints.configure(width=374,cursor="xterm",background=_bgcolorlight,takefocus="True")
+
+        self.radiovar=StringVar()
+
+        self.FunctionRadio = Radiobutton(top)
+        self.FunctionRadio.place(relx=0.11, rely=0.76, relheight=0.05, relwidth=0.14)
+        self.FunctionRadio.configure(text='''Function''',bg=_bgcolorlight,value=1,width=72)
+        self.FunctionRadio.configure(variable=self.radiovar, value="func")
+        self.FunctionRadio.configure(command=lambda : (self.fx.configure(state="normal"),
+                                                        self.Check.configure(state="normal"),
+                                                        self.xpoints.configure(state="disabled"),
+                                                        self.ypoints.configure(state="disabled")))
+
+
+        self.LineRadio = Radiobutton(top)
+        self.LineRadio.place(relx=0.26, rely=0.76, relheight=0.05, relwidth=0.12)
+        self.LineRadio.configure(text='''Line''',bg=_bgcolorlight,value=2,width=72)
+        self.LineRadio.configure(variable=self.radiovar, value="line")
+        self.LineRadio.configure(command=lambda : (self.fx.configure(state="disabled"),
+                                                self.Check.configure(state="disabled"),
+                                                self.xpoints.configure(state="normal"),
+                                                self.ypoints.configure(state="normal")))
+        self.chkvar=StringVar()
+        self.Check= Checkbutton(top,variable=self.chkvar)
+        self.Check.place(relx=0.40, rely=0.76, relheight=0.05, relwidth=0.24)
+        self.Check.configure(text='''Options for Function''',background=_bgcolorlight,onvalue='options', offvalue='nooptions')
+        self.Check.configure(command = lambda : self.functionOptions(self.chkvar.get()))
+
+
         self.Label1 = Label(top)
         self.Label1.place(relx=0.77, rely=0.08, height=18, width=47)
         self.Label1.configure(text='''x lower''')
         self.Label1.configure(fg=_fgcolorlight)
         self.Label1.configure(background=_lightwindowbackground)
+        
 
         self.x_lower = Entry(top)
         self.x_lower.place(relx=0.88, rely=0.08, relheight=0.05, relwidth=0.08)
@@ -158,20 +201,15 @@ class New_Toplevel_1:
         self.x_upper.configure(fg=_fgcolorlight)
 
         self.Label3 = Label(top)
-        self.Label3.place(relx=0.04, rely=0.85, height=18, width=35)
+        self.Label3.place(relx=0.04, rely=0.82, height=18, width=35)
         self.Label3.configure(text='''f(x)=''')
         self.Label3.configure(fg=_fgcolorlight)
         self.Label3.configure(background=_lightwindowbackground)
 
         self.bt_plot = Button(top)
         self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
-        self.bt_plot.configure(activebackground=_activebgcolordark)
-        self.bt_plot.configure(command=lambda: gui_support.Plot(self.fx.get(),
-                                                                range(int(self.x_lower.get()),
-                                                                      int(self.x_upper.get())),
-                                                                self.color_input.get(),
-                                                                self.theme,
-                                                                self.Canvas1, self.line_style, self.file_path))
+        self.bt_plot.configure(activebackground=_activebgcolordark)    
+        self.bt_plot.configure(command=lambda : self.toPlot(self.radiovar.get()))
         self.bt_plot.configure(cursor="left_ptr")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
@@ -183,6 +221,18 @@ class New_Toplevel_1:
         self.Label4.configure(text=" Choose the Color ")
         self.Label4.configure(fg=_fgcolorlight)
         self.Label4.configure(background=_lightwindowbackground)
+
+        self.Label5 = Label(top)
+        self.Label5.place(relx=0.11, rely=0.88, height=18)
+        self.Label5.configure(text='''X-points''')
+        self.Label5.configure(fg=_fgcolorlight)
+        self.Label5.configure(background=_lightwindowbackground)
+
+        self.Label6 = Label(top)
+        self.Label6.place(relx=0.39, rely=0.88, height=18)
+        self.Label6.configure(text='''Y-points''')
+        self.Label6.configure(fg=_fgcolorlight)
+        self.Label6.configure(background=_lightwindowbackground)
 
         self.current_color = StringVar(top)
         self.current_color.set('Red')
@@ -209,12 +259,7 @@ class New_Toplevel_1:
         self.bt_go = Button(top)
         self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
         self.bt_go.configure(activebackground=_activebgcolordark)
-        self.bt_go.configure(command=lambda: gui_support.Plot(self.fx.get(),
-                                                              range(int(self.x_lower.get()),
-                                                                    int(self.x_upper.get())),
-                                                              self.color_input.get(),
-                                                              self.theme,
-                                                              self.Canvas1, self.line_style, self.file_path))
+        self.bt_go.configure(command=lambda : self.toPlot(self.radiovar.get()))
         self.bt_go.configure(cursor="left_ptr")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
@@ -229,6 +274,105 @@ class New_Toplevel_1:
         self.bt_themeswitch.configure(text='Dark Theme')
         self.bt_themeswitch.configure(command=self.changeTheme)
         self.bt_themeswitch.configure(fg=_fgcolorlight)
+    
+    def toPlot(self,radiovar):
+        if radiovar=="func":
+            # print("FUNC")
+            gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
+                int(self.x_upper.get())),
+                self.color_input.get(),
+                self.theme,
+                self.Canvas1, self.line_style, self.file_path)
+
+        if radiovar=="func_discrete":
+            xpoints=list(map(float, self.pentry1.get().split(',')))
+            gui_support.Plot(self.fx.get(),xpoints,
+                self.color_input.get(),
+                self.theme,
+                self.Canvas1, self.line_style, self.file_path,True)
+
+        if radiovar=="line":
+            # print("LINE")
+            gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
+                self.color_input.get(),
+                self.theme,
+                self.Canvas1, self.line_style, self.file_path)
+
+
+    def popOptionsWin(self):
+        """This is the popup Window for function plotting options.
+        This function holds all the gui for this purpose"""
+        global root
+        pwin=self.pwin=Toplevel(root)
+        pwin.geometry("700x160+408+220")
+        pwin.title("Options for Function Plotting")
+        pwin.configure(background= _lightwindowbackground)
+
+        self.pentry1=Entry(pwin)
+        self.pentry1.place(relx=0.05, rely=0.45, relheight=0.14, relwidth=0.40)
+        self.pentry1.configure(width=374,cursor="xterm",background=_bgcolorlight)
+        self.pentry1.configure(state="disabled")
+
+        self.pentry2=Entry(pwin)
+        self.pentry2.place(relx=0.55, rely=0.45, relheight=0.14, relwidth=0.40)
+        self.pentry2.configure(width=374,cursor="xterm",background=_bgcolorlight)
+        self.pentry2.configure(state="disabled")
+
+        # self.plabel1 = Label(pwin)
+        # self.plabel1.place(relx=0.05, rely=0.30, height=18, width=120)
+        # self.plabel1.configure(text=" Add discrete points ",fg= _fgcolorlight,background= _lightwindowbackground)
+        # self.plabel1.configure()
+
+        # self.plabel2 = Label(pwin)
+        # self.plabel2.place(relx=0.53, rely=0.30, height=18, width=120)
+        # self.plabel2.configure(text=" Add step size ",fg= _fgcolorlight,background= _lightwindowbackground)
+        # self.plabel2.configure()
+
+        self.pchkvar=StringVar()
+        self.pcheck1= Checkbutton(pwin,variable=self.pchkvar)
+        self.pcheck1.place(relx=0.05, rely=0.30, relheight=0.15, relwidth=0.40)
+        self.pcheck1.configure(text='''Add Discrete Points''',background=_lightwindowbackground,onvalue='discrete', offvalue='nodiscrete')
+        self.pcheck1.configure(command = lambda : self.popupOptionsManager(self.pchkvar.get()))
+
+        # self.pchkvar2=StringVar()
+        self.pcheck2= Checkbutton(pwin,variable=self.pchkvar)
+        self.pcheck2.place(relx=0.55, rely=0.30, relheight=0.15, relwidth=0.40)
+        self.pcheck2.configure(text='''Add Step Size''',background=_lightwindowbackground,onvalue='stepsize', offvalue='nostepsize')
+        self.pcheck2.configure(command = lambda : self.popupOptionsManager(self.pchkvar.get()))
+
+
+        self.bt_submit = Button(pwin)
+        self.bt_submit.place(relx=0.465, rely=0.75, height=30, width=50)
+        self.bt_submit.configure(activebackground=_activebgcolordark,background=_bgcolorlight,fg=_fgcolorlight)    
+        self.bt_submit.configure(text= '''Submit''',cursor= "left_ptr",width= 47)
+        self.bt_submit.configure(command=lambda : self.toPlot(self.radiovar.get()))
+        self.bt_submit.configure()
+
+
+    def popupOptionsManager(self,chkbtnvar):
+        if chkbtnvar=='discrete':
+            self.pentry1.configure(state="normal")
+            self.pentry2.configure(state="disabled")
+        if chkbtnvar=='nodiscrete':
+            self.pentry1.configure(state="disabled")
+            
+        if chkbtnvar=='stepsize':
+            self.pentry2.configure(state="normal")
+            self.pentry1.configure(state="disabled")
+        if chkbtnvar=='nostepsize':
+            self.pentry2.configure(state="disabled")
+
+
+    
+    def functionOptions(self,chkbtnvar):
+        if chkbtnvar=='options':
+            self.popOptionsWin()
+        if chkbtnvar=='nooptions':
+            self.pwin.destroy()
+
+
+
+
 
     def Dropdown_Changed(self, current_color):
         color = '#000000'
@@ -320,8 +464,8 @@ class New_Toplevel_1:
             self.theme = 'dark'
             root.configure(background=_darkwindowbackground)
 
-        gui_support.Plot(self.fx.get(), range(int(self.x_lower.get()), int(self.x_upper.get())),
-                         self.color_input.get(), self.theme, self.Canvas1, self.line_style, self.file_path)
+
+        self.toPlot(self.radiovar.get())
 
     def resize_plot(self, event):
         if gui_support.plotted:
