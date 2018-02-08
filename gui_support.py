@@ -42,21 +42,6 @@ def Plot(fx, xpoints, color_name, theme, canvas, line_style, file_path,discrete=
 
     sys.stdout.flush()
 
-# def Plot_discrete(fx, xpoints, color_name, theme, canvas, line_style, file_path):
-
-#     global plotted
-#     if fx:
-#         plu.plot(fx, xpoints, color_name, 'X-axis', 'Y-axis', theme, True, line_style, file_path,True)
-#         image = Image.open(".temp/generated_plot.png").resize(
-#             (canvas.winfo_width(), canvas.winfo_height()))
-#         gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
-#         canvas.create_image(0, 0, image=gif1, anchor=NW)
-#         canvas.gif1 = gif1
-#         plotted = True
-#     else:
-#         canvas.delete(ALL)
-
-#     sys.stdout.flush()
 
 def Plot_line(arrays, color_name, theme, canvas, line_style, file_path):
 

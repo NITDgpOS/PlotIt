@@ -94,9 +94,6 @@ class Menubar:
         menubar.add_cascade(label="Help", menu=helpmenu)
 
         root.config(menu=menubar)
-# class OptionDialog:
-#     def __init__(self, master):
-        
 
 
 class New_Toplevel_1:
@@ -111,6 +108,8 @@ class New_Toplevel_1:
         self.line_style = '-'
         self.file_path = ''
         root.configure(background=_lightwindowbackground)
+        self.pvalue1=StringVar() #To store enrty values from popup winodw
+        self.pvalue2=StringVar()
 
         self.Canvas1 = Canvas(top)
         self.Canvas1.place(relx=0.04, rely=0.05, relheight=0.70, relwidth=0.69)
@@ -126,12 +125,7 @@ class New_Toplevel_1:
         self.fx.configure(background=_bgcolorlight)
         self.fx.configure(font="TkFixedFont")
         self.fx.configure(width=296)
-        self.fx.bind('<Return>', lambda x: gui_support.Plot(self.fx.get(),
-                                                            range(int(self.x_lower.get()),
-                                                                  int(self.x_upper.get())),
-                                                            self.color_input.get(),
-                                                            self.theme,
-                                                            self.Canvas1, self.line_style, self.file_path))
+        self.fx.bind('<Return>', lambda x : self.toPlot(self.radiovar.get()))
         self.fx.configure(fg=_fgcolorlight)
         self.fx.configure(insertbackground=_fgcolorlight)
 
@@ -143,6 +137,7 @@ class New_Toplevel_1:
         self.ypoints = ttk.Entry(top)
         self.ypoints.place(relx=0.39, rely=0.92, relheight=0.04, relwidth=0.25)
         self.ypoints.configure(width=374,cursor="xterm",background=_bgcolorlight,takefocus="True")
+        self.ypoints.bind('<Return>', lambda x : self.toPlot(self.radiovar.get()))
 
         self.radiovar=StringVar()
 
@@ -166,9 +161,9 @@ class New_Toplevel_1:
                                                 self.ypoints.configure(state="normal")))
         self.chkvar=StringVar()
         self.Check= Checkbutton(top,variable=self.chkvar)
-        self.Check.place(relx=0.40, rely=0.76, relheight=0.05, relwidth=0.24)
+        self.Check.place(relx=0.40, rely=0.76, relheight=0.05, relwidth=0.245)
         self.Check.configure(text='''Options for Function''',background=_bgcolorlight,onvalue='options', offvalue='nooptions')
-        self.Check.configure(command = lambda : self.functionOptions(self.chkvar.get()))
+        self.Check.configure(command = lambda : self.functionOptions(self.chkvar.get()),state="disabled")
 
 
         self.Label1 = Label(top)
@@ -209,7 +204,8 @@ class New_Toplevel_1:
         self.bt_plot = Button(top)
         self.bt_plot.place(relx=0.67, rely=0.85, height=26, width=47)
         self.bt_plot.configure(activebackground=_activebgcolordark)    
-        self.bt_plot.configure(command=lambda : self.toPlot(self.radiovar.get()))
+        self.bt_plot.configure(command=lambda : (self.toPlot(self.radiovar.get()),
+                                                    print(self.radiovar.get())))
         self.bt_plot.configure(cursor="left_ptr")
         self.bt_plot.configure(text='''Plot''')
         self.bt_plot.configure(width=47)
@@ -276,8 +272,8 @@ class New_Toplevel_1:
         self.bt_themeswitch.configure(fg=_fgcolorlight)
     
     def toPlot(self,radiovar):
+        """This method determines which type of figure to plot based on value of a vriable"""
         if radiovar=="func":
-            # print("FUNC")
             gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
                 int(self.x_upper.get())),
                 self.color_input.get(),
@@ -285,14 +281,20 @@ class New_Toplevel_1:
                 self.Canvas1, self.line_style, self.file_path)
 
         if radiovar=="func_discrete":
-            xpoints=list(map(float, self.pentry1.get().split(',')))
+            xpoints=list(map(float, self.pvalue1.split(',')))
             gui_support.Plot(self.fx.get(),xpoints,
                 self.color_input.get(),
                 self.theme,
                 self.Canvas1, self.line_style, self.file_path,True)
 
+        if radiovar=="func_stepsize":
+            gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
+                int(self.x_upper.get()),int(self.pvalue2)),
+                self.color_input.get(),
+                self.theme,
+                self.Canvas1, self.line_style, self.file_path)
+
         if radiovar=="line":
-            # print("LINE")
             gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
                 self.color_input.get(),
                 self.theme,
@@ -304,52 +306,47 @@ class New_Toplevel_1:
         This function holds all the gui for this purpose"""
         global root
         pwin=self.pwin=Toplevel(root)
-        pwin.geometry("700x160+408+220")
+        pwin.geometry("420x340+470+200")
         pwin.title("Options for Function Plotting")
         pwin.configure(background= _lightwindowbackground)
+        pwin.protocol('WM_DELETE_WINDOW', lambda : (self.Check.deselect(),self.pwin.destroy()))
 
+        #Entry for Discrete Option
         self.pentry1=Entry(pwin)
-        self.pentry1.place(relx=0.05, rely=0.45, relheight=0.14, relwidth=0.40)
+        self.pentry1.place(relx=0.15, rely=0.20, relheight=0.08, relwidth=0.70)
         self.pentry1.configure(width=374,cursor="xterm",background=_bgcolorlight)
         self.pentry1.configure(state="disabled")
 
+        #Entry for Stepsize Option
         self.pentry2=Entry(pwin)
-        self.pentry2.place(relx=0.55, rely=0.45, relheight=0.14, relwidth=0.40)
+        self.pentry2.place(relx=0.15, rely=0.50, relheight=0.08, relwidth=0.70)
         self.pentry2.configure(width=374,cursor="xterm",background=_bgcolorlight)
         self.pentry2.configure(state="disabled")
 
-        # self.plabel1 = Label(pwin)
-        # self.plabel1.place(relx=0.05, rely=0.30, height=18, width=120)
-        # self.plabel1.configure(text=" Add discrete points ",fg= _fgcolorlight,background= _lightwindowbackground)
-        # self.plabel1.configure()
-
-        # self.plabel2 = Label(pwin)
-        # self.plabel2.place(relx=0.53, rely=0.30, height=18, width=120)
-        # self.plabel2.configure(text=" Add step size ",fg= _fgcolorlight,background= _lightwindowbackground)
-        # self.plabel2.configure()
 
         self.pchkvar=StringVar()
         self.pcheck1= Checkbutton(pwin,variable=self.pchkvar)
-        self.pcheck1.place(relx=0.05, rely=0.30, relheight=0.15, relwidth=0.40)
+        self.pcheck1.place(relx=0.30, rely=0.10, relheight=0.10, relwidth=0.37)
         self.pcheck1.configure(text='''Add Discrete Points''',background=_lightwindowbackground,onvalue='discrete', offvalue='nodiscrete')
         self.pcheck1.configure(command = lambda : self.popupOptionsManager(self.pchkvar.get()))
 
-        # self.pchkvar2=StringVar()
         self.pcheck2= Checkbutton(pwin,variable=self.pchkvar)
-        self.pcheck2.place(relx=0.55, rely=0.30, relheight=0.15, relwidth=0.40)
+        self.pcheck2.place(relx=0.30, rely=0.40, relheight=0.10, relwidth=0.37)
         self.pcheck2.configure(text='''Add Step Size''',background=_lightwindowbackground,onvalue='stepsize', offvalue='nostepsize')
         self.pcheck2.configure(command = lambda : self.popupOptionsManager(self.pchkvar.get()))
 
 
         self.bt_submit = Button(pwin)
-        self.bt_submit.place(relx=0.465, rely=0.75, height=30, width=50)
+        self.bt_submit.place(relx=0.42, rely=0.75, height=35, width=60)
         self.bt_submit.configure(activebackground=_activebgcolordark,background=_bgcolorlight,fg=_fgcolorlight)    
         self.bt_submit.configure(text= '''Submit''',cursor= "left_ptr",width= 47)
-        self.bt_submit.configure(command=lambda : self.toPlot(self.radiovar.get()))
-        self.bt_submit.configure()
+        self.bt_submit.configure(command=lambda : (self.popupInputManager(self.pchkvar.get()),
+                                                                        self.pwin.destroy()))
 
 
     def popupOptionsManager(self,chkbtnvar):
+        """This method manages the options in popup window
+        it checks which methods is selected and disables the other"""
         if chkbtnvar=='discrete':
             self.pentry1.configure(state="normal")
             self.pentry2.configure(state="disabled")
@@ -362,16 +359,21 @@ class New_Toplevel_1:
         if chkbtnvar=='nostepsize':
             self.pentry2.configure(state="disabled")
 
+    def popupInputManager(self,chkbtnvar):
+        """This method manages the input of popup window"""
+        if self.pentry1.get() and chkbtnvar=="discrete":
+            self.radiovar.set("func_discrete")
+            self.pvalue1=self.pentry1.get()
 
-    
+        if self.pentry2.get() and chkbtnvar=="stepsize":
+            self.radiovar.set("func_stepsize") 
+            self.pvalue2=self.pentry2.get()   
+   
     def functionOptions(self,chkbtnvar):
         if chkbtnvar=='options':
             self.popOptionsWin()
         if chkbtnvar=='nooptions':
             self.pwin.destroy()
-
-
-
 
 
     def Dropdown_Changed(self, current_color):
