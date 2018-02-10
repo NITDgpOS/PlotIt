@@ -20,7 +20,6 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = 1
 
-# import traceback
 import gui_support
 
 
@@ -112,6 +111,7 @@ class New_Toplevel_1:
         self.file_path = ''
         root.configure(background=_lightwindowbackground)
         self.pvalue1='' #To store enrty values from popup winodw
+        self.pvaluetemp='' #To store the value of popup entry field for reploting
 
         self.Canvas1 = Canvas(top)
         self.Canvas1.place(relx=0.04, rely=0.05, relheight=0.70, relwidth=0.69)
@@ -271,7 +271,7 @@ class New_Toplevel_1:
         self.bt_go = Button(top)
         self.bt_go.place(relx=0.90, rely=0.47, height=20, width=40)
         self.bt_go.configure(activebackground=_activebgcolordark)
-        self.bt_go.configure(command=lambda : self.toPlot(self.radiovar.get()))
+        self.bt_go.configure(command=lambda : self.rePlot(self.radiovar.get()))
         self.bt_go.configure(cursor="left_ptr")
         self.bt_go.configure(text='''Go''')
         self.bt_go.configure(width=47)
@@ -288,7 +288,7 @@ class New_Toplevel_1:
         self.bt_themeswitch.configure(fg=_fgcolorlight)
     
     def toPlot(self,radiovar):
-        """This method determines which type of figure to plot based on value of a vriable"""
+        """This method determines which type of figure to plot based on value of a vriable-- pvalue1"""
         if radiovar=="func":
             if self.chkvar.get()=="discrete":
                 self.popDiscreteWin()
@@ -301,6 +301,33 @@ class New_Toplevel_1:
                     self.pvalue1=''
 
                 elif len(self.pvalue1)==0:
+                    msgbox.showerror("Error","No Value provided in discrete value")
+
+            else:
+                gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
+                    int(self.x_upper.get()),int(self.stepsize.get())),
+                    self.color_input.get(),
+                    self.theme,
+                    self.Canvas1, self.line_style, self.file_path)
+
+        if radiovar=="line":
+            gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
+                self.color_input.get(),
+                self.theme,
+                self.Canvas1, self.line_style, self.file_path)
+
+    def rePlot(self,radiovar):
+        """This method re-plot the figure using new color scheme
+         based on value of a temp vriable--pvaluetemp"""
+        if radiovar=="func":
+            if self.chkvar.get()=="discrete":
+                if len(self.pvaluetemp)!=0:
+                    xpoints=list(map(float, self.pvaluetemp.split(',')))
+                    gui_support.Plot(self.fx.get(),xpoints,
+                        self.color_input.get(),
+                        self.theme,
+                        self.Canvas1, self.line_style, self.file_path,True)
+                elif len(self.pvaluetemp)==0:
                     msgbox.showerror("Error","No Value provided in discrete value")
 
             else:
@@ -346,6 +373,7 @@ class New_Toplevel_1:
         """This method manages the input of popup window"""
         if self.pentry1.get() :
             self.pvalue1=str(self.pentry1.get())
+            self.pvaluetemp=str(self.pentry1.get())
 
 
     def Dropdown_Changed(self, current_color):
@@ -439,7 +467,7 @@ class New_Toplevel_1:
             root.configure(background=_darkwindowbackground)
 
 
-        self.toPlot(self.radiovar.get())
+        self.rePlot(self.radiovar.get())
 
     def resize_plot(self, event):
         if gui_support.plotted:
