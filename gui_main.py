@@ -102,8 +102,8 @@ class New_Toplevel_1:
         top.title("PlotIt")
 
         self.theme = 'light'
-        self.line_style = '-'
         self.file_path = ''
+        self.line_style = '-'
         root.configure(background=_lightwindowbackground)
 
         self.Canvas1 = Canvas(top)
@@ -199,10 +199,10 @@ class New_Toplevel_1:
         self.dropdown_menu_color['menu'].configure(fg=_fgcolorlight)
 
         self.current_line_style = StringVar(top)
-        self.current_line_style.set('solid line')
-        self.line_styles = {'solid line', 'dashed line', 'dash dot', 'dots'}
+        self.current_line_style.set('-')
+        self.line_styles = {'-', '--', '-.', ':'}
         self.dropdown_menu_line_style = OptionMenu(top, self.current_line_style,
-                                        *self.line_styles, command=self.Dropdown_Changed)
+                                        *self.line_styles, command=self.dropdown_changed_line_style)
         self.dropdown_menu_line_style.pack(side='top', anchor='w')
         self.dropdown_menu_line_style.place(relx=0.78, rely=0.60, height=18, width=100)
         self.dropdown_menu_line_style.configure(activebackground=_activebgcolordark)
@@ -258,6 +258,16 @@ class New_Toplevel_1:
             color = '#008000'
         self.color_input.delete(0, 100)
         self.color_input.insert(0, color)
+
+    def dropdown_changed_line_style(self, current_line_style):
+        if current_line_style == '-':
+            self.line_style = '-'
+        elif current_line_style == '--':
+            self.line_style = '--'
+        elif current_line_style == '-.':
+            self.line_style = '-.'
+        elif current_line_style == ':':
+            self.line_style = ':'
 
     def changeTheme(self):
         if self.bt_themeswitch['text'] == "Light Theme":

@@ -4,6 +4,7 @@ from math import *
 import matplotlib.pyplot as plt
 import matplotlib.style as mplstyle
 from matplotlib import colors as mcolors
+import traceback
 
 
 def create_y_values(func, xvals):
@@ -62,6 +63,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
 
     except Exception:
         print("An error occured.")
+        print(traceback.format_exc())
     
     if file_path != "":
         plt.savefig(file_path)
