@@ -17,6 +17,7 @@ have a reference to an issue.**
 - Hack the code, kill the bug or introduce the new feature you had in mind,
   do all kinds of awesome stuff.
 - After you are done add your changes using ``` git add --all```
+- Run ``` flaske8 . ``` to check lint errors
 - Commit your changes using ``` git commit ``` and provide a commit message.
 - After you have committed your changes push your changes to your forked repository
   using ``` git push origin mybug ```
