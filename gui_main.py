@@ -199,12 +199,12 @@ class New_Toplevel_1:
         self.dropdown_menu_color['menu'].configure(fg=_fgcolorlight)
 
         self.current_line_style = StringVar(top)
-        self.current_line_style.set('-')
-        self.line_styles = {'-', '--', '-.', ':'}
+        self.current_line_style.set('Solid line (-)')
+        self.line_styles = {'Solid line (-)', 'Dashed (--)', 'Dot dash (-.)', 'Dots (:)'}
         self.dropdown_menu_line_style = OptionMenu(top, self.current_line_style,
                                         *self.line_styles, command=self.dropdown_changed_line_style)
         self.dropdown_menu_line_style.pack(side='top', anchor='w')
-        self.dropdown_menu_line_style.place(relx=0.78, rely=0.60, height=18, width=100)
+        self.dropdown_menu_line_style.place(relx=0.78, rely=0.55, height=18, width=100)
         self.dropdown_menu_line_style.configure(activebackground=_activebgcolordark)
         self.dropdown_menu_line_style.configure(background=_bgcolorlight)
         self.dropdown_menu_line_style.configure(fg=_fgcolorlight)
@@ -260,13 +260,13 @@ class New_Toplevel_1:
         self.color_input.insert(0, color)
 
     def dropdown_changed_line_style(self, current_line_style):
-        if current_line_style == '-':
+        if current_line_style == 'Solid line (-)':
             self.line_style = '-'
-        elif current_line_style == '--':
+        elif current_line_style == 'Dashed (--)':
             self.line_style = '--'
-        elif current_line_style == '-.':
+        elif current_line_style == 'Dot dash (-.)':
             self.line_style = '-.'
-        elif current_line_style == ':':
+        elif current_line_style == 'Dots (:)':
             self.line_style = ':'
 
     def changeTheme(self):
@@ -305,6 +305,11 @@ class New_Toplevel_1:
             self.dropdown_menu_color['menu'].configure(fg=_fgcolorlight)
             self.dropdown_menu_color['menu'].configure(background=_bgcolorlight)
             self.dropdown_menu_color['menu'].configure(activebackground=_activebgcolordark)
+            self.dropdown_menu_line_style.configure(background=_bgcolorlight)
+            self.dropdown_menu_line_style.configure(fg=_fgcolorlight)
+            self.dropdown_menu_line_style['menu'].configure(fg=_fgcolorlight)
+            self.dropdown_menu_line_style['menu'].configure(background=_bgcolorlight)
+            self.dropdown_menu_line_style['menu'].configure(activebackground=_activebgcolordark)
             self.theme = 'light'
             root.configure(background=_lightwindowbackground)
         else:
@@ -341,6 +346,10 @@ class New_Toplevel_1:
             self.dropdown_menu_color.configure(fg=_fgcolordark)
             self.dropdown_menu_color['menu'].configure(fg=_fgcolordark)
             self.dropdown_menu_color['menu'].configure(background=_bgcolordark)
+            self.dropdown_menu_line_style.configure(background=_bgcolordark)
+            self.dropdown_menu_line_style.configure(fg=_fgcolordark)
+            self.dropdown_menu_line_style['menu'].configure(fg=_fgcolordark)
+            self.dropdown_menu_line_style['menu'].configure(background=_bgcolordark)
             self.theme = 'dark'
             root.configure(background=_darkwindowbackground)
 
