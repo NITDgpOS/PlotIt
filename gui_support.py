@@ -26,11 +26,28 @@ from lib import plotutil as plu
 plotted = False
 
 
-def Plot(fx, xpoints, color_name, theme, canvas, line_style, file_path):
+def Plot(fx, xpoints, color_name, theme, canvas, line_style, file_path,discrete=False):
 
     global plotted
     if fx:
-        plu.plot(fx, xpoints, color_name, 'X-axis', 'Y-axis', theme, True, line_style, file_path)
+        plu.plot(fx, xpoints, color_name, 'X-axis', 'Y-axis', theme, True, line_style, file_path,discrete)
+        image = Image.open(".temp/generated_plot.png").resize(
+            (canvas.winfo_width(), canvas.winfo_height()))
+        gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
+        canvas.create_image(0, 0, image=gif1, anchor=NW)
+        canvas.gif1 = gif1
+        plotted = True
+    else:
+        canvas.delete(ALL)
+
+    sys.stdout.flush()
+
+
+def Plot_line(arrays, color_name, theme, canvas, line_style, file_path):
+
+    global plotted
+    if arrays:
+        plu.plot_line(arrays, color_name, 'X-axis', 'Y-axis', theme, True, line_style, file_path)
         image = Image.open(".temp/generated_plot.png").resize(
             (canvas.winfo_width(), canvas.winfo_height()))
         gif1 = ImageTk.PhotoImage(image, Image.ANTIALIAS)
