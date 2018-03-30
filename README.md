@@ -56,7 +56,7 @@ python plotit.py -f 'sin(x)'
 
 python plotit.py -f 'x**2 + x'
 
-python plotit.py -f cos(x)
+python plotit.py -f 'cos(x)'
 
 python plotit.py -f 'x**3 + x**2 + x'
 
