@@ -15,8 +15,15 @@ dot_size = 5
 file_path = ""
 
 
-# Handle case if user presses Ctrl+C, show proper message while shutting down
 def sigint_handler(signum, frame):
+    """
+    Custom handler called by signal.single module to display shutdown message if user presses
+    Ctrl+C to quit program.
+
+    :param signum: the signal number
+    :param frame: the current stack frame
+    :returns: None
+    """
     print('shutting down PlotIt...')
     exit(0)
 
@@ -51,8 +58,8 @@ parser.add_option('-l', '--line', dest='line',
                   \'[x1,x2,x3,...,xn],[y1,y2,y3,...,yn]\'')
 parser.add_option('-t', '--theme', dest='theme',
                   help='Enter theme for displaying plot (dark or light)')
-parser.add_option('--symbol', dest='line_style', 
-                  help='Enter linestyle for plot, accepted linestyles "-", ":", "-.", "--"', 
+parser.add_option('--symbol', dest='line_style',
+                  help='Enter linestyle for plot, accepted linestyles "-", ":", "-.", "--"',
                   choices=["-",":","-.","--"])
 parser.add_option('--save', dest='file_path',
                   help='Enter file path eg: path/filename.png')
