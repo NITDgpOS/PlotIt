@@ -21,6 +21,7 @@ except ImportError:
     py3 = 1
 
 import gui_support
+from lib import InvalidFunctionException
 
 
 def vp_start_gui():
@@ -304,17 +305,29 @@ class New_Toplevel_1:
                     msgbox.showerror("Error","No Value provided in discrete value")
 
             else:
-                gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
-                    int(self.x_upper.get()),int(self.stepsize.get())),
+                if not self.check_value(self.x_lower.get(), 'x lower'):
+                    return
+                if not self.check_value(self.x_upper.get(), 'x upper'):
+                    return
+                if not self.check_value(self.stepsize.get(), 'step size'):
+                    return
+                try:
+                    gui_support.Plot(self.fx.get(),range(int(self.x_lower.get()),
+                        int(self.x_upper.get()),int(self.stepsize.get())),
+                        self.color_input.get(),
+                        self.theme,
+                        self.Canvas1, self.line_style, self.file_path)
+                except InvalidFunctionException, (instance):
+                    msgbox.showerror("Error", instance.parameter)
+
+        if radiovar=="line":
+            try:
+                gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
                     self.color_input.get(),
                     self.theme,
                     self.Canvas1, self.line_style, self.file_path)
-
-        if radiovar=="line":
-            gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
-                self.color_input.get(),
-                self.theme,
-                self.Canvas1, self.line_style, self.file_path)
+            except InvalidFunctionException, (instance):
+                msgbox.showerror("Error", instance.parameter)
 
     def rePlot(self,radiovar):
         """This method re-plot the figure using new color scheme
@@ -336,7 +349,7 @@ class New_Toplevel_1:
                     self.color_input.get(),
                     self.theme,
                     self.Canvas1, self.line_style, self.file_path)
-
+                
         if radiovar=="line":
             gui_support.Plot_line(toArray(self.xpoints.get(),self.ypoints.get()),
                 self.color_input.get(),
@@ -517,6 +530,18 @@ class New_Toplevel_1:
         Popupmenu1.configure(activebackground="#f9f9f9")
         Popupmenu1.post(event.x_root, event.y_root)
 
+    def check_value(self, value, label):
+        if value == '':
+            msgbox.showerror("Error", "{} cannot be empty".format(label))
+            return False
+
+        try:
+            float(value)
+        except ValueError:
+            msgbox.showerror("Error", "{} should be an integer".format(label))
+            return False
+
+        return True
 
 if __name__ == "__main__":
     vp_start_gui()
