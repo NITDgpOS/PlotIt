@@ -4,6 +4,7 @@ from math import *
 import matplotlib.pyplot as plt
 import matplotlib.style as mplstyle
 from matplotlib import colors as mcolors
+from exceptions import InvalidFunctionException
 
 
 def create_y_values(func, xvals):
@@ -15,10 +16,9 @@ def create_y_values(func, xvals):
             yval = eval(func)
             yvals.append(yval)
         except Exception:
-            print("Function cannot be evaluated for x =", x)
-            return
-    return yvals
+            raise InvalidFunctionException('Function is improper, unbale to evaluate function at x = ' + str(x))
 
+    return yvals
 
 def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file_path, discrete=False):
 
@@ -27,6 +27,7 @@ def plot(func, xpoints, color_name, xlabel, ylabel, theme, gui, line_style, file
     print("Funtion: {}".format(func))
 
     if discrete:
+
         print("Plotting funcion for points: {}".format(', '.join(map(str, xpoints))))
     else:
         print("Starting abcissa: {}".format(xpoints[0]))
@@ -122,7 +123,7 @@ def plot_line(arrays, color_name, xlabel, ylabel, theme, gui, line_style, file_p
             print("Error: You need same number of X and Y values")
 
     except Exception:
-        print("An error occured.")
+        raise InvalidFunctionException('Values are improper')
     
     if file_path != "":
         plt.savefig(file_path)
